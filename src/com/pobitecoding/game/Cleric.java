@@ -2,7 +2,7 @@ package com.pobitecoding.game;
 
 import java.util.Random;
 /**
- * 연습문제 8-4
+ * 연습문제 9-1
  * 
  * @author pobite
  *
@@ -12,8 +12,8 @@ public class Cleric {
 
     String name;
     
-    final int HP_MAX = 50;
-    final int MP_MAX = 10;
+    static final int HP_MAX = 50;
+    static final int MP_MAX = 10;
     
     int HP = HP_MAX;
     int MP = MP_MAX;
