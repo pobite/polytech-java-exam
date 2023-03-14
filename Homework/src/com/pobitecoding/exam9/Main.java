@@ -1,4 +1,4 @@
-package com.pobitecoding.game;
+package com.pobitecoding.exam9;
 
 import java.util.Random;
 
