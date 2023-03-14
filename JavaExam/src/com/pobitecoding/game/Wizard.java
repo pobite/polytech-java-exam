@@ -1,8 +1,9 @@
 package com.pobitecoding.game;
 
 public class Wizard {
-    private String name;
     private int hp;
+    private int mp;
+    private String name;
     private Wand wand;
     
     public String getName() {
@@ -10,6 +11,13 @@ public class Wizard {
     }
     
     public void setName(String name) {
+        if (name == null) {
+            throw new IllegalArgumentException("이름은 null이 아니어야 함");
+        }
+        if (name.length() <= 3) {
+            throw new IllegalArgumentException("이름이 너무 짧음");
+        }
+        
         this.name = name;
     }
     
@@ -18,7 +26,18 @@ public class Wizard {
     }
     
     public void setHp(int hp) {
-        this.hp = hp;
+        this.hp = (hp < 0) ? 0 : hp;
+    }
+    
+    public int getMp(int mp) {
+        return mp;
+    }
+    
+    public void setMp(int mp) {
+        if (mp < 0) {
+            throw new IllegalArgumentException("mp가 0미만이 아니어야 함");
+        }
+        this.mp = mp;
     }
     
     public Wand getWand() {
@@ -26,6 +45,9 @@ public class Wizard {
     }
     
     public void setWand(Wand wand) {
+        if (wand == null) {
+            throw new IllegalArgumentException("wand가 null이 아니어야 함");
+        }
         this.wand = wand;
     }
     
