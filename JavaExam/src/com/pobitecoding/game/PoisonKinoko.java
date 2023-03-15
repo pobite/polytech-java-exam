@@ -33,7 +33,7 @@ public class PoisonKinoko extends Kinoko {
             // d. 용사의 HP 의 1/5에 해당하는 포인트를 용사의 HP 로부터 감소시키고,
             // “~포인트의 데미지" 라고 표시
             int reduceHp = hero.getHp() / 5;
-            hero.setHp(reduceHp);
+            hero.setHp(hero.getHp() - reduceHp);
             System.out.println(reduceHp + "포인트의 데미지");
             
             // e.“독 공격의 남은 횟수" 를 1 감소 시킨다
