@@ -25,7 +25,7 @@ public class PoisonKinoko extends Kinoko {
         super.attack(hero);
         
         // b. “독 공격의 남은 횟수"가 0이 아니면 다음을 추가로 수행한다
-        if (poisonCnt  != 0) {
+        if (poisonCnt  != 0) {  // 멀티 쓰레드 환경에서 문제될수도, poisonCnt > 0으로 수정
             
             // c. 화면에 “추가로, 독 포자를 살포했다!” 를 표시
             System.out.println("추가로, 독 포자를 살포했다!");
