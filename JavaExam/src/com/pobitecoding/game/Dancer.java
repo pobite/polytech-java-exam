@@ -1,7 +1,6 @@
 package com.pobitecoding.game;
 
-// 두 개의 인터페이스를 구현한 일반 클래스
-public class Dancer extends Character implements Human {
+public class Dancer extends Character implements Human, Creature {
 
     public Dancer(String name) {
         super(name);
