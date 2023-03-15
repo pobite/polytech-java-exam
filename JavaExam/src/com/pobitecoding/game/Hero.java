@@ -9,6 +9,11 @@ public class Hero {
     private int hp;
 
     
+    public Hero() {
+        System.out.println("Hero 생성자");
+    }
+    
+    
     /*
      * getter/setter
      */
@@ -27,6 +32,14 @@ public class Hero {
     
     public void setHp(int hp) {
         this.hp = hp;
+    }
+    
+    public void run() {
+        System.out.println("달린다");
+    }
+    
+    public void attack(Kinoko kinoko) {
+        System.out.println(kinoko + "을 공격한다");
     }
     
 }
