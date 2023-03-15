@@ -1,5 +1,5 @@
 package com.pobitecoding.exam12;
 
-public abstract class TangibleAsset {
+public abstract class TangibleAsset extends Asset {
     
 }
