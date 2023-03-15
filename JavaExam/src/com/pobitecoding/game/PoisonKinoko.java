@@ -2,10 +2,12 @@ package com.pobitecoding.game;
 
 public class PoisonKinoko extends Kinoko {
 
-    private int poisonCnt = 5;
+    private int poisonCnt;
     
     public PoisonKinoko(char suffix) {
         super(suffix);
+        // 초기화는 생성자에서 하면 좋음
+        poisonCnt = 5;
     }
     
     public int getPoisonCnt() {
