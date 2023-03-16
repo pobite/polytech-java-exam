@@ -2,11 +2,14 @@ package com.pobitecoding.game;
 
 import java.util.Objects;
 
-public class Student {
+public class Student implements Comparable<Student> {
+    private int id;
     private String name;
 
-    public Student(String name) {
-        super();
+    
+
+    public Student(int id, String name) {
+        this.id = id;
         this.name = name;
     }
 
@@ -35,9 +38,15 @@ public class Student {
         Student other = (Student) obj;
         return Objects.equals(name, other.name);
     }
-
-
     
+//    // sort 규칙 재정의(오버라이드)
+//    @Override
+//    public int compareTo(Student o) {
+//        return (id < o.id) ? -1 : ((id == o.id) ? 0 : 1);
+//    }
     
-    
+    @Override
+    public int compareTo(Student o) {
+        return this.name.compareTo(o.name) * - 1;
+    }
 }

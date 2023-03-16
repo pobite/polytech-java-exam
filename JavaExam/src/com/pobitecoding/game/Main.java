@@ -1,40 +1,44 @@
 package com.pobitecoding.game;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class Main {
 
     public static void main(String[] args) {
         
-//        List<Student> 장학생명부 = new ArrayList();
-//        
-//        Student 반장 = new Student("이동학");
-//        장학생명부.add(반장);
-//        System.out.println(장학생명부);
-//        
-//        반장 = new Student("이동학");
-//        
-//        // 높은 사람
-//        장학생명부.remove(반장);   // 박경덕
-//        System.out.println(장학생명부);
+        List<String> strs = new ArrayList<>();
+        strs.add("이동학");
+        strs.add("박경덕");
+        strs.add("강태근");
+        strs.add("최유림");
+        
+        Collections.sort(strs);
+        System.out.println(strs);
         
         
-        Set<Student> 장학생명부 = new HashSet();
+        List<Integer> nums = new ArrayList<>();
+        nums.add(5);
+        nums.add(1);
+        nums.add(8);
+        nums.add(2);
         
-        Student 반장 = new Student("이동학");
-        장학생명부.add(반장);
-        
-        System.out.println(반장.hashCode());
-        System.out.println(장학생명부);
+        Collections.sort(nums);
+        System.out.println(nums);
         
         
-        반장 = new Student("이동학");
-        System.out.println(반장.hashCode());
         
-        // 높은 사람
-        장학생명부.remove(반장);   // 박경덕
-        System.out.println(장학생명부);
+        // 내가 만든 클래스
         
+        List<Student> students = new ArrayList<>();
+
+        students.add(new Student(0, "이동학"));
+        students.add(new Student(1, "박경덕"));
+        students.add(new Student(2, "강태근"));
+        students.add(new Student(3, "최유림"));
+        
+        Collections.sort(students);
+        System.out.println(students);
     }
 }
