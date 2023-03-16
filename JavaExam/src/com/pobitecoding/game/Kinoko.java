@@ -1,6 +1,6 @@
 package com.pobitecoding.game;
 
-public class Kinoko {
+public class Kinoko implements Life {
     
     private int hp = 50;
     private char suffix;

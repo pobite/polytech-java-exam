@@ -1,15 +1,40 @@
 package com.pobitecoding.game;
 
-import java.util.Random;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Main {
 
     public static void main(String[] args) {
         
-        PoisonKinoko poisonKinoko = new PoisonKinoko('A');
-        Hero hero = new Hero();
-        hero.setHp(50);
+//        List<Student> 장학생명부 = new ArrayList();
+//        
+//        Student 반장 = new Student("이동학");
+//        장학생명부.add(반장);
+//        System.out.println(장학생명부);
+//        
+//        반장 = new Student("이동학");
+//        
+//        // 높은 사람
+//        장학생명부.remove(반장);   // 박경덕
+//        System.out.println(장학생명부);
         
-        poisonKinoko.attack(hero);
+        
+        Set<Student> 장학생명부 = new HashSet();
+        
+        Student 반장 = new Student("이동학");
+        장학생명부.add(반장);
+        
+        System.out.println(반장.hashCode());
+        System.out.println(장학생명부);
+        
+        
+        반장 = new Student("이동학");
+        System.out.println(반장.hashCode());
+        
+        // 높은 사람
+        장학생명부.remove(반장);   // 박경덕
+        System.out.println(장학생명부);
+        
     }
 }

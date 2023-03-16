@@ -1,6 +1,12 @@
 package com.pobitecoding.game;
 
-public class Wizard {
+public class Wizard extends Character implements Life {
+    
+    
+    public Wizard(String name) {
+        super(name);
+    }
+
     private int hp;
     private int mp;
     private String name;
@@ -55,5 +61,9 @@ public class Wizard {
         int basePoint = 10;    // 기본회복 포인트
         int recovPoint = (int) (basePoint * this.wand.getPower());   // 지팡이에 의한 증폭
         hero.setHp(hero.getHp() + recovPoint);                  // 용사의 HP를 회복
+    }
+
+    @Override
+    public void attack(Kinoko kinoko) {
     }
 }
