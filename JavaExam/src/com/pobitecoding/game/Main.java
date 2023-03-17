@@ -30,9 +30,9 @@ public class Main {
         // 익명클래스
         // 추상클래스인데 new하는 순간 완성할 게라는 뜻
         // 이 순간에만 딱 만들어지는 클래스
-        Asset asset = new Asset("aaa", 100) {
+//        Asset asset = new Asset("aaa", 100) {
             
-        };
+//        };
         
         // 미리 만들어 놓고 sort하는 게 아니라
         // 즉흥적으로 할 수 있음
