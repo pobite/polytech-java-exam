@@ -48,7 +48,6 @@ public class Tree extends Position {
         return Double.doubleToLongBits(distnace) == Double.doubleToLongBits(other.distnace);
     }
 
- 
     public String toString(Construction con) {
         
         if (this.getDistnace() < con.getR()) {
