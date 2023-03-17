@@ -1,5 +1,6 @@
 package com.pobitecoding.game;
 
+import java.util.Comparator;
 import java.util.Objects;
 
 public class Student implements Comparable<Student> {
@@ -7,6 +8,14 @@ public class Student implements Comparable<Student> {
     private String name;
 
     
+    
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public Student(int id, String name) {
         this.id = id;
@@ -49,4 +58,5 @@ public class Student implements Comparable<Student> {
     public int compareTo(Student o) {
         return this.name.compareTo(o.name) * - 1;
     }
+
 }

@@ -1,4 +1,4 @@
-package com.pobitecoding.game;
+package com.pobitecoding.test;
 
 class Outer {
     
