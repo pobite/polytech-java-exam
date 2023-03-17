@@ -8,37 +8,16 @@ public class Main {
 
     public static void main(String[] args) {
         
-        List<String> strs = new ArrayList<>();
-        strs.add("이동학");
-        strs.add("박경덕");
-        strs.add("강태근");
-        strs.add("최유림");
+        // 제네릭 사용 안 하는 경우
+        // 제니릭으로 타입 지정 안하면 암묵적으로 Object를 받는다고 함
+        List list = new ArrayList<>();
         
-        Collections.sort(strs);
-        System.out.println(strs);
+        list.add(1);
+        list.add("홍길동");
+        list.add(null);
+        list.add(1);
         
-        
-        List<Integer> nums = new ArrayList<>();
-        nums.add(5);
-        nums.add(1);
-        nums.add(8);
-        nums.add(2);
-        
-        Collections.sort(nums);
-        System.out.println(nums);
-        
-        
-        
-        // 내가 만든 클래스
-        
-        List<Student> students = new ArrayList<>();
-
-        students.add(new Student(0, "이동학"));
-        students.add(new Student(1, "박경덕"));
-        students.add(new Student(2, "강태근"));
-        students.add(new Student(3, "최유림"));
-        
-        Collections.sort(students);
-        System.out.println(students);
+        Object object = (int) (list.get(0));
+        System.out.println((String) list.get(0) + 10);
     }
 }
