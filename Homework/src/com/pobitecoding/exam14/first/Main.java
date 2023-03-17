@@ -25,7 +25,7 @@ public class Main {
         Date dateType = calendar.getTime();
         
         // 6. SimpleDateFormat 을 이용하여 Date 인스턴스의 내용을 표시한다
-        SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        SimpleDateFormat format = new SimpleDateFormat("서기 yyyy년 MM월 dd일");
         
         String s = format.format(dateType);
         System.out.println(s);
