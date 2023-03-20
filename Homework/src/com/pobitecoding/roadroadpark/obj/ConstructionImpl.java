@@ -1,7 +1,7 @@
 package com.pobitecoding.roadroadpark.obj;
 
 import java.util.Objects;
-import com.pobitecoding.roadroadpark.Position;
+import com.pobitecoding.findroadpark.Position;
 
 public class ConstructionImpl implements RoadObject {
     
