@@ -41,6 +41,41 @@ public class Cleric {
         this(name, HP_MAX, MP_MAX);
     }
     
+    
+    
+    
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getHp() {
+        return hp;
+    }
+
+    public void setHp(int hp) {
+        this.hp = hp;
+    }
+
+    public int getMp() {
+        return mp;
+    }
+
+    public void setMp(int mp) {
+        this.mp = mp;
+    }
+
+    public static int getHpMax() {
+        return HP_MAX;
+    }
+
+    public static int getMpMax() {
+        return MP_MAX;
+    }
+
     void selfAid() {
         this.mp -= 5;
         this.hp = HP_MAX;

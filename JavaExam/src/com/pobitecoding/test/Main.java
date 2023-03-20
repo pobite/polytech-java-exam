@@ -1,41 +1,53 @@
 package com.pobitecoding.test;
 
-
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Reader;
+import java.io.StringReader;
 
 public class Main {
 
-  public static void main(String[] args) {
+  public static void main(String[] args) throws IOException {
+      
+      String msg = "Hello World";
+      Reader reader = new StringReader(msg);
 
-    int a = 10;
-    double d = 3; // int -> double
-    String s = "베스트 " + d; // double -> String
-    String x = "베스트 " + true;
-    System.out.println(s);
-    System.out.println(x);
-
-    int c = (int) 3.2;
-    int f = (int) 3.2;
-
-    System.out.println(5.0 / 2.0);
-
-    System.out.println(Math.max(10, 20));
-
-    // 5 ~ 10
-    int rand = new java.util.Random().nextInt(6) + 5;
-    System.out.println("랜덤한 수 " + rand);
-
-    // -5 ~ 5
-    int rand2 = new java.util.Random().nextInt(11) - 5;
-    System.out.println("랜덤한 수 " + rand2);
-    
-    
-    // input data using Scanner
-    System.out.print("이름을 입력해 주세요: ");
-    String name = new java.util.Scanner(System.in).nextLine();
-    
-    System.out.print("당신의 나이를 입력해주세요: ");
-    int age = new java.util.Scanner(System.in).nextInt();
-    
-    System.out.println("반갑습니다. " + age + "살의 " + name + "씨");
+      
+      
+      FileOutputStream fos = new FileOutputStream("save.txt", true);
+      fos.write(65);
+      fos.write(66);
+      fos.flush();
+      fos.close();
+      
+//      System.out.println(fileRead("dat.txt"));
+  }
+  
+  public static String fileRead(String fileName) throws IOException {
+      String result = "";
+      FileReader fr = new FileReader(fileName);
+      
+      int ch = fr.read();
+      while (ch != -1) {
+//          System.out.print((char) ch);
+          result += (char) ch;
+          ch = fr.read();
+      }
+      fr.close();
+      return result;
+  }
+  
+  
+  public static void fileWriteCode() throws IOException {
+      // 열고
+      FileWriter fw = new FileWriter("dat.txt", true);  // true: 이어쓰기
+      // 내용작성
+      fw.write("Hello World\n");
+      // 쓰고
+      fw.flush();
+      // 닫고
+      fw.close();
   }
 }
