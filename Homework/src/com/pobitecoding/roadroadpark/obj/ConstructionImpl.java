@@ -1,22 +1,33 @@
-package com.pobitecoding.roadroadpark;
+package com.pobitecoding.roadroadpark.obj;
 
 import java.util.Objects;
+import com.pobitecoding.roadroadpark.Position;
 
-public class Tree implements Thing {
+public class ConstructionImpl implements RoadObject {
     
+    private int r;
     private Position position;
     
+
+    public int getR() {
+        return r;
+    }
+
     public Position getPosition() {
         return position;
+    }
+    
+    public void setR(int r) {
+        this.r = r;
     }
 
     public void setPosition(Position position) {
         this.position = position;
     }
-
+    
     @Override
     public int hashCode() {
-        return Objects.hash(position);
+        return Objects.hash(position, r);
     }
 
     @Override
@@ -27,20 +38,14 @@ public class Tree implements Thing {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        Tree other = (Tree) obj;
-        return Objects.equals(position, other.position);
+        ConstructionImpl other = (ConstructionImpl) obj;
+        return Objects.equals(position, other.position) && r == other.r;
     }
 
     @Override
     public String toString() {
-        return "Tree [position=" + position + "]";
+        return "Construction [r=" + r + ", position=" + position + "]";
     }
+
     
-//    public String sound(Construction con) {
-////        if (this.getDistnace() < con.getR()) {
-////            return "noisy";
-////        } else {
-////            return "silent";
-////        }
-//    }
 }
