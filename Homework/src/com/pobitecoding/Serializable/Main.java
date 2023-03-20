@@ -6,6 +6,7 @@ import java.io.ObjectOutputStream;
 
 public class Main {
     
+    // 직렬화
     public static void main(String[] args) {
         
         Department department = new Department("총무부");

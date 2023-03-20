@@ -6,6 +6,7 @@ import java.io.ObjectInputStream;
 
 public class MainSecond {
     
+    // 복원
     public static void main(String[] args) {
         
         try (FileInputStream fis = new FileInputStream("company.dat")) {
