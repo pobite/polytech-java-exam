@@ -10,8 +10,16 @@ public class BankTest {
     public void nameTest() {
         Bank bank = new Bank();
         
-        // 3글자로 했을 경우
-        bank.setName("기업은");
-        assertEquals("기업행", bank.getName());
+        // 4글자로 했을 경우
+        bank.setName("기업은행");
+        assertEquals("기업은행", bank.getName());
+    }
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void throwsExcpetionWithThreeCharName() {
+        // 4글자로 했을 경우
+        Bank bank = new Bank();
+        bank.setName("기업은행");
+        assertEquals("기업은행", bank.getName());
     }
 }

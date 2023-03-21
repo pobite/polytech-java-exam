@@ -7,9 +7,11 @@ import com.pobitecoding.unit.Counter;
 public class CounterTest {
 
     @Test
-    public void test() {
+    public void counterIncreaseTest() {
         Counter counter = new Counter();
+        counter.setCount(10);
         
+        counter.increase();
+        assertEquals(11, counter.getCount());
     }
-
 }
