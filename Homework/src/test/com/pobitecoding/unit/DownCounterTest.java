@@ -10,7 +10,7 @@ public class DownCounterTest {
     public void counterDecreaseTest() {
         DownCounter downCounter = new DownCounter();
         downCounter.setCount(10);
-        downCounter.decrease();
+        downCounter.count();
         assertEquals(9, downCounter.getCount());
     }
 }

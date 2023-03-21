@@ -12,7 +12,7 @@ public class Counter {
         this.count = count;
     }
     
-    public void increase() {
+    public void count() {
         count++;
     }
 }

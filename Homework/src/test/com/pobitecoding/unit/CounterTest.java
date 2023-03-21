@@ -10,7 +10,7 @@ public class CounterTest {
     public void counterIncreaseTest() {
         Counter counter = new Counter();
         counter.setCount(10);
-        counter.increase();
+        counter.count();
         assertEquals(11, counter.getCount());
     }
 }
