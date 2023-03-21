@@ -1,6 +1,6 @@
 package com.pobitecoding.unit;
 
-public class Counter {
+public class DownCounter {
     
     private int count = 0;
 
@@ -12,7 +12,7 @@ public class Counter {
         this.count = count;
     }
     
-    public void increment() {
-        count++;
+    public void decrement() {
+        count--;
     }
 }
