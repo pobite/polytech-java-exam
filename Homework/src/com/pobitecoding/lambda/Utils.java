@@ -1,6 +1,6 @@
 package com.pobitecoding.lambda;
 
-public interface Utils {
+public class Utils {
     
     public static boolean isOdd(int n) {
         return n % 2 == 1;
