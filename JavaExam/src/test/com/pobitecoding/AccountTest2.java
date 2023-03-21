@@ -1,4 +1,4 @@
-package test;
+package test.com.pobitecoding;
 
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
