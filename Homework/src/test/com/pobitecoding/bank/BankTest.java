@@ -1,8 +1,8 @@
-package test.com.pobitecoding.banktest;
+package test.com.pobitecoding.bank;
 
 import static org.junit.Assert.*;
 import org.junit.Test;
-import com.pobitecoding.banktest.Bank;
+import com.pobitecoding.bank.Bank;
 
 public class BankTest {
 
