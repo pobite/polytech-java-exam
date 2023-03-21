@@ -1,4 +1,4 @@
-package com.pobitecoding.test;
+package com.pobitecoding.testJava;
 
 import java.io.FileOutputStream;
 import java.io.FileReader;

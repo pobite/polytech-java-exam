@@ -1,4 +1,4 @@
-package com.pobitecoding.test;
+package com.pobitecoding.testJava;
 
 public class Word {
     

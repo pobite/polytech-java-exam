@@ -1,4 +1,4 @@
-package com.pobitecoding.test;
+package com.pobitecoding.testJava;
 
 public class Account {
     
@@ -9,6 +9,15 @@ public class Account {
         System.out.println("=== 테스트 시작 ===");
         Account account = new Account("홍길동", 30000);
         System.out.println(account);
+        
+        Account account2 = new Account("한석봉", 0);
+        account.transfer(account2, Integer.MAX_VALUE + 1);  // MAX 값 넘는 경우
+        
+        // 같으면 성공, 다르면 실패
+        if (account2.getBalance() != 2147483648L) {
+            System.out.println("getBalance() 값 다름 " + account2.getBalance());
+        }
+        
         System.out.println("=== 테스트 끝 ===");
     }
     
@@ -21,6 +30,11 @@ public class Account {
         this.balance = balance;
     }
     
+    // 1원 ~ 1억까지
+    // 테스트할 때
+    // 1, 1억
+    // 양 끝값에서 하나씩 빼기
+    // 0, 1억 1원 : 실패
     public void transfer(Account dest, int amount) {
         dest.setBalance(dest.getBalance() + amount);
         balance -= amount;
