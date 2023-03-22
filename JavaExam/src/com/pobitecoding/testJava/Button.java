@@ -22,6 +22,7 @@ class Button {
 
     void click() {
         listener.onClick();
+        listener.onClick();
     }
    
     public static void main(String[] args) throws InterruptedException {
