@@ -30,16 +30,38 @@ public class ThreadMain {
     
     public static void main(String[] args) {
         
-        System.out.println("키 입력");
-        Scanner scanner = new Scanner(System.in);
+//        System.out.println("키 입력");
+//        Scanner scanner = new Scanner(System.in);
         
+        // 현재 수행되는 스레드를 얻는 것
+//        System.out.println("Thread : " + Thread.currentThread().getName());
+
+        StringBuilder sb = new StringBuilder();
         
-        // 스레드 2개 있음
-        // 기본 Main에서 동작하는 스레드
         new Thread(() -> {
-            System.out.println("ggg");
+            for (int i = 0; i < 3; i ++) {
+                try {
+                    Thread.sleep(50);
+                    System.out.println("Thread : " + Thread.currentThread().getName() + " " + i);
+                    sb.append(i);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
         }).start();
         
-        scanner.nextLine();
+        // 복사본
+        new Thread(() -> {
+            for (int i = 0; i < 3; i ++) {
+                try {
+                    System.out.println("Thread : " + Thread.currentThread().getName() + " " + i);
+                    Thread.sleep(50);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+        
+//        scanner.nextLine();
     }
 }
