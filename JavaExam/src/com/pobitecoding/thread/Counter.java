@@ -9,7 +9,10 @@ public class Counter {
             new Thread(() -> {
                 try {
                     Thread.sleep(10);
-                    counter.num += 1; 
+                    // 이 객체의 동시 접근을 막겠다
+                    synchronized (counter) {
+                        counter.num += 1; 
+                    }
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
