@@ -1,4 +1,4 @@
-package com.pobitecoding.exam15;
+package com.pobitecoding.exam.exam15;
 
 import java.io.FileWriter;
 
