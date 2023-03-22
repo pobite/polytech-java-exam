@@ -1,8 +1,10 @@
-package test.com.pobitecoding.unit;
+package test.com.pobitecoding.extra.unit;
 
 import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
-import com.pobitecoding.unit.DownCounter;
+
+import com.pobitecoding.extra.unit.DownCounter;
 
 public class DownCounterTest {
 

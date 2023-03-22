@@ -1,4 +1,4 @@
-package com.pobitecoding.Instance;
+package com.pobitecoding.extra.Instance;
 
 import java.util.Date;
 import java.util.Objects;

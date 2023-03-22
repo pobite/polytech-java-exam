@@ -1,8 +1,10 @@
-package test.com.pobitecoding.unit;
+package test.com.pobitecoding.extra.unit;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
-import com.pobitecoding.unit.UpCounter;
+
+import com.pobitecoding.extra.unit.UpCounter;
 
 public class CounterTest {
 

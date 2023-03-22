@@ -1,4 +1,4 @@
-package com.pobitecoding.collection;
+package com.pobitecoding.algorithm.collection;
 
 public class Person {
     String name;

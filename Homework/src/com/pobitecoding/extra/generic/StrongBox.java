@@ -1,4 +1,4 @@
-package com.pobitecoding.generic;
+package com.pobitecoding.extra.generic;
 
 // 1 .금고 클래스에 담는 인스턴스의 타입은 미정
 public class StrongBox<T> {

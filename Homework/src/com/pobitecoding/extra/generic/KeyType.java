@@ -1,4 +1,4 @@
-package com.pobitecoding.generic;
+package com.pobitecoding.extra.generic;
 
 public enum KeyType {
     PADLOCK,

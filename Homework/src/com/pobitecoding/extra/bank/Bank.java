@@ -1,4 +1,4 @@
-package com.pobitecoding.bank;
+package com.pobitecoding.extra.bank;
 
 public class Bank {
     private String name;

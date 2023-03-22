@@ -1,4 +1,4 @@
-package com.pobitecoding.collection;
+package com.pobitecoding.algorithm.collection;
 
 import java.util.ArrayList;
 import java.util.List;

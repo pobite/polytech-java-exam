@@ -1,4 +1,4 @@
-package com.pobitecoding.findroad;
+package com.pobitecoding.algorithm.findroad;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.pobitecoding.file;
+package com.pobitecoding.extra.file;
 
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;

@@ -1,4 +1,4 @@
-package com.pobitecoding.property;
+package com.pobitecoding.extra.property;
 
 import java.io.FileReader;
 import java.io.IOException;

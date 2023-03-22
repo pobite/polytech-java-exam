@@ -1,4 +1,4 @@
-package com.pobitecoding.roadroadpark.copy;
+package com.pobitecoding.algorithm.roadroadpark.copy;
 
 public enum Type {
     Construction,

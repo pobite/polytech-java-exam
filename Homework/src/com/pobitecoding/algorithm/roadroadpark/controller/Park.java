@@ -1,4 +1,4 @@
-package com.pobitecoding.roadroadpark.controller;
+package com.pobitecoding.algorithm.roadroadpark.controller;
 
 import java.util.HashMap;
 import java.util.List;

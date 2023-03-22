@@ -1,4 +1,4 @@
-package com.pobitecoding.roadroadpark.service;
+package com.pobitecoding.algorithm.roadroadpark.service;
 
 import java.util.ArrayList;
 import java.util.List;

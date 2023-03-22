@@ -1,4 +1,4 @@
-package com.pobitecoding.lambda;
+package com.pobitecoding.extra.lambda;
 
 public class Utils {
     

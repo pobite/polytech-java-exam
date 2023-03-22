@@ -1,4 +1,4 @@
-package com.pobitecoding.collection;
+package com.pobitecoding.algorithm.collection;
 
 import java.net.PortUnreachableException;
 import java.util.HashMap;

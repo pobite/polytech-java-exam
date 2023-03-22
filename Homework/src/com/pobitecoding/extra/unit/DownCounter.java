@@ -1,4 +1,4 @@
-package com.pobitecoding.unit;
+package com.pobitecoding.extra.unit;
 
 public class DownCounter implements Counter {
     

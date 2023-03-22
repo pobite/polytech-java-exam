@@ -1,4 +1,4 @@
-package com.pobitecoding.roadroadpark.obj;
+package com.pobitecoding.algorithm.roadroadpark.obj;
 
 import java.util.Objects;
 import com.pobitecoding.findroadpark.Position;

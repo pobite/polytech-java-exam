@@ -1,4 +1,4 @@
-package com.pobitecoding.Serializable;
+package com.pobitecoding.extra.Serializable;
 
 import java.io.FileInputStream;
 import java.io.IOException;
