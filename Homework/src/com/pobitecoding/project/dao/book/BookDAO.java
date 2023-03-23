@@ -13,4 +13,6 @@ public interface BookDAO {
     public BookVO read(int id);
 
     public List<BookVO> readAll();
+    
+    public List<BookVO> readBorrow();
 }

@@ -11,7 +11,7 @@ public class BookBorrow {
     
     public BookBorrow() {
         isPossibleBorrow = false;
-        isPossibleExtend = false;
+        isPossibleExtend = true;
         startDate = null;
         endDate = null;
     }

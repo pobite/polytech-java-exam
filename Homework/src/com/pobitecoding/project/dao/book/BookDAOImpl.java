@@ -42,4 +42,15 @@ public class BookDAOImpl implements BookDAO {
                          .map(entry -> entry.getValue())
                          .collect(Collectors.toList());
     }
+
+    @Override
+    public List<BookVO> readBorrow() {
+        return dataSource.entrySet()
+                         .stream()
+                         .filter(entry -> entry.getValue().getBookBorrow().isPossibleBorrow() == true)
+                         .map(entry -> entry.getValue())
+                         .collect(Collectors.toList());
+    }
+
+
 }

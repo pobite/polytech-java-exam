@@ -6,12 +6,11 @@ import java.util.Date;
 import java.util.List;
 import com.pobitecoding.project.controller.main.MainController;
 import com.pobitecoding.project.sort.BookAuthorAscComparator;
-import com.pobitecoding.project.sort.BookEndDateAscComparator;
+import com.pobitecoding.project.sort.BookEndDateDescComparator;
 import com.pobitecoding.project.sort.BookPublicationDateDescComparator;
 import com.pobitecoding.project.sort.BookPublisherAscComparator;
 import com.pobitecoding.project.sort.BookTitleAscComparator;
 import com.pobitecoding.project.vo.BookVO;
-import com.pobitecoding.project.vo.MemberVO;
 
 public abstract class BookUtil {
     
@@ -195,22 +194,73 @@ public abstract class BookUtil {
      * 도서 대출 여부 조회
      * 모든 도서의 대출 여부를 조회합니다.
      */
-    public static void loan() {
+    public static int loan() {
         
-        List<BookVO> bookList = MainController.bookService.readAll();
+        List<String> types = Arrays.asList("1. 대출조회", "2. 대출연장", "3. 대출승인");
+        for (String type : types) {
+            System.out.println(type);
+        }
         
-        if (bookList.size() != 0) {
-            for (BookVO book : bookList) {
-                if (book.getBookBorrow().isPossibleBorrow()) {
-                    System.out.println("ID: " + book.getId() + ", " + book.getTitle() + "의 책이 \"대출 가능\"합니다");
+        System.out.println("타입을 선택하세요:");
+        int type = MainController.scan.nextInt();
+        MainController.scan.nextLine();
+        
+        if (ValidationUtil.isInCorrectNum(type, 1, 3)) return 0;
+            
+        switch (type) {
+            case 1 :
+                List<BookVO> bookList = MainController.bookService.readBorrow();
+                
+                if (bookList.size() != 0) {
+                    bookList.sort(new BookEndDateDescComparator());
+                    System.out.println("최근 출간한 순서로 정렬됩니다.");
+                    for (BookVO book : bookList) {
+                        System.out.println(book.toString());
+                    }
                 }
                 else {
-                    System.out.println("ID: " + book.getId() + ", " + book.getTitle() + "의 책이 \"대출 불가능\"합니다");
+                    System.out.println("현재 대출 가능한 책이 없습니다.");
                 }
-            }
-        }
-        else {
-            System.out.println("등록된 도서가 없습니다.");
+                break;
+            case 2 :
+                System.out.println("대출 연장할 도서의 id를 입력하세요:");
+                int id = MainController.scan.nextInt();
+                MainController.scan.nextLine();
+                
+                BookVO vo = MainController.bookService.read(id);
+                
+                /**
+                 * 도서가 존재하지 않는 경우
+                 */
+                if (vo == null) {
+                    System.out.println("도서가 존재하지 않습니다.");
+                }
+                
+                /**
+                 * 도서가 존재하는 경우
+                 */
+                else {
+                    if (vo.getBookBorrow().isPossibleExtend()) {
+                        System.out.println("대출 여부를 변경하시려면 \"Y\"를 입력해주세요");
+                        String answer = MainController.scan.nextLine();
+                        
+                        if (answer.equalsIgnoreCase("Y")) {
+                            vo.getBookBorrow().setPossibleExtend(false);
+                            
+                            // 1주 연장되게 구현 
+                        }
+                        else {
+                            System.out.println("변경을 선택하지 않았습니다");
+                        }
+                    }
+                    else {
+                        System.out.println("이미 대출 연장을 사용하여 대출 연장이 불가합니다");
+                    }
+                }
+                break;
+            case 3 :
+                System.out.println("현재 구현 중에 있습니다. 잠시만 기다려 주세요");
+                break;
         }
     }
     
