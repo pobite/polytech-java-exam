@@ -1,5 +1,9 @@
 package com.pobitecoding.project.util;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.regex.Pattern;
+
 public abstract class ValidationUtil {
     
     /**
@@ -16,5 +20,44 @@ public abstract class ValidationUtil {
             return true;
         }
         return false;
+    }
+    
+    /**
+     * 해당 문자열이 숫자로 구성되어 있는지 판단합니다
+     * @param input String 타입의 문자열
+     * @return
+     */
+    public static boolean isNumber(String input) {
+        return Pattern.matches("^[0-9]*$", input) ? true : false;
+    }
+    
+    /**
+     * 해당 문자열이 문자로 구성되어 있는지 확인합니다
+     * 
+     * @param input String 타입의 문자열
+     * @return
+     */
+    public static boolean isText(String input) {
+        return Pattern.matches("^[a-zA-Z]*$ ", input) ? true : false;
+    }
+    
+    /**
+     * 해당 날짜가 올바른 형태의 날짜인지 확인합니다
+     * 포맷은 yyyy-MM-dd 인지 확인합니다
+     * 
+     * @param checkDate String 타입의 날짜 문자
+     * @return
+     */
+    public static boolean isDate(String checkDate) {
+        
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        
+        format.setLenient(false);
+        try {
+            format.parse(checkDate);
+            return true;
+        } catch (ParseException e) {
+            return false;
+        }
     }
 }

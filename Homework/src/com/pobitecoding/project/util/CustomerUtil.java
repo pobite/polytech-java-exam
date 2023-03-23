@@ -189,8 +189,13 @@ public abstract class CustomerUtil {
      * 이전 회원삭제 명령을 취소합니다.
      */
     public static void deleteRollback() {
-        if (MainController.memberService.create(MainController.prviousMember)) {
+        
+        if (MainController.memberService != null) {
+            MainController.memberService.create(MainController.prviousMember);
             System.out.println(MainController.prviousMember.getName() + " 회원이 복구되었습니다.");
+        }
+        else {
+            System.out.println("최근에 삭제한 회원 존재하지 않습니다");
         }
     }
 }

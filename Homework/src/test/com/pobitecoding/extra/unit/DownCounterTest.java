@@ -7,7 +7,7 @@ import org.junit.Test;
 import com.pobitecoding.extra.unit.DownCounter;
 
 public class DownCounterTest {
-
+    
     @Test
     public void counterDecreaseTest() {
         DownCounter downCounter = new DownCounter();

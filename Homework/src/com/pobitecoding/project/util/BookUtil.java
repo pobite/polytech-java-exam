@@ -237,8 +237,13 @@ public abstract class BookUtil {
      * 이전 도서삭제 명령을 취소합니다.
      */
     public static void deleteRollback() {
-        if (MainController.bookService.create(MainController.prviousBook)) {
+        
+        if (MainController.prviousBook != null) {
+            MainController.bookService.create(MainController.prviousBook);
             System.out.println(MainController.prviousBook.getTitle() + " 책이 복구되었습니다.");
+        }
+        else {
+            System.out.println("최근에 삭제한 도서가 존재하지 않습니다");
         }
     }
 }
