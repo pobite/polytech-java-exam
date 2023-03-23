@@ -18,18 +18,20 @@ public abstract class BookUtil {
      * 도서 조회
      * 모든 도서를 조회합니다.
      */
-    public static void search() {
+    public static int search() {
         List<BookVO> bookList = MainController.bookService.readAll();
         
         if (bookList.size() != 0) {
             
             System.out.println("정렬 기준을 선택하세요:");
-            int sortType = MainController.scan.nextInt();
+            int menu = MainController.scan.nextInt();
             
             List<String> types = Arrays.asList("1. 마감일", "2. 출간일", "3. 도서명", "4. 저자", "5. 출판사");
             for (String type : types) {
                 System.out.println(type);
             }
+            
+            if (ValidationUtil.isInCorrectNum(menu, 1, 5)) return 0;
             
             System.out.println("변경할 타입을 선택하세요:");
             int type = MainController.scan.nextInt();
@@ -64,6 +66,7 @@ public abstract class BookUtil {
         else {
             System.out.println("등록된 도서가 없습니다.");
         }
+        return 0;
     }
     
     /**
@@ -107,7 +110,7 @@ public abstract class BookUtil {
      * 도서 수정
      * id를 기준으로 한 권의 도서를 수정합니다. 
      */
-    public static void edit() {
+    public static int edit() {
         System.out.println("수정할 id를 입력하세요:");
         int id = MainController.scan.nextInt();
         MainController.scan.nextLine();
@@ -137,6 +140,9 @@ public abstract class BookUtil {
             System.out.println("변경할 타입을 선택하세요:");
             int type = MainController.scan.nextInt();
             MainController.scan.nextLine();
+            
+            if (ValidationUtil.isInCorrectNum(type, 1, 4)) return 0;
+
             
             switch (type) {
                 case 1 :
@@ -186,6 +192,7 @@ public abstract class BookUtil {
                 System.out.println("처리되었습니다.");
             }
         }
+        return 0;
     }
     /**
      * 도서 대출 여부 조회

@@ -7,8 +7,8 @@ import com.pobitecoding.project.service.book.BookService;
 import com.pobitecoding.project.service.book.BookServiceImpl;
 import com.pobitecoding.project.service.member.MemberService;
 import com.pobitecoding.project.service.member.MemberServiceImpl;
-import com.pobitecoding.project.util.CheckUtil;
 import com.pobitecoding.project.util.PrintUtil;
+import com.pobitecoding.project.util.ValidationUtil;
 import com.pobitecoding.project.vo.BookVO;
 import com.pobitecoding.project.vo.MemberVO;
 
@@ -32,7 +32,7 @@ public class MainController {
             int menu = scan.nextInt();
             scan.nextLine();    // Enter를 무시
             
-            if (CheckUtil.isInCorrectNumMain(menu)) continue;
+            if (ValidationUtil.isInCorrectNum(menu, 1, 3)) continue;
             /**
              * 1. 회원관리
              */

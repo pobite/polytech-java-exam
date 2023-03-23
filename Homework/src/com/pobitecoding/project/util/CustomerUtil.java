@@ -35,7 +35,7 @@ public abstract class CustomerUtil {
      * 
      * Input: name, gender, birthDate, address, number
      */
-    public static void join() {
+    public static int join() {
         System.out.println("회원의 성함을 입력하세요:");
         String name = MainController.scan.nextLine();
         
@@ -43,6 +43,8 @@ public abstract class CustomerUtil {
         System.out.println("(0: 남자, 1: 여자, 2: 기타)");
         int gender = MainController.scan.nextInt();
         MainController.scan.nextLine();
+        if (ValidationUtil.isInCorrectNum(gender, 1, 5)) return 0;
+
         
         System.out.println("회원의 생년월일을 입력하세요:");
         System.out.println("ex. yyyy/mm/dd");
@@ -52,7 +54,7 @@ public abstract class CustomerUtil {
         String address = MainController.scan.nextLine();
         
         System.out.println("회원의 번호를 입력하세요:");
-        System.out.println("ex. '-' 구분자를 사용바랍니다.");
+        System.out.println("ex. '-' 없이 사용바랍니다.");
         String number = MainController.scan.nextLine();
         
         Date now = new Date();
@@ -74,17 +76,18 @@ public abstract class CustomerUtil {
         if (MainController.memberService.create(vo)) {
             System.out.println(name + "회원이 등록되었습니다.");
         }
+        return 0;
     }
     
     /**
      * 회원 수정
      * id를 기준으로 한 명의 회원을 수정합니다. 
      */
-    public static void edit() {
+    public static int edit() {
         System.out.println("수정할 id를 입력하세요:");
         int id = MainController.scan.nextInt();
         MainController.scan.nextLine();
-
+        
         MemberVO vo = MainController.memberService.read(id);
         
         /**
@@ -111,6 +114,9 @@ public abstract class CustomerUtil {
             System.out.println("변경할 타입을 선택하세요:");
             int type = MainController.scan.nextInt();
             MainController.scan.nextLine();
+            if (ValidationUtil.isInCorrectNum(type, 1, 5)) return 0;
+
+            
             
             switch (type) {
                 case 1 :
@@ -153,6 +159,7 @@ public abstract class CustomerUtil {
                     System.out.println("처리되었습니다.");
                 }
         }
+        return 0;
     }
 
     

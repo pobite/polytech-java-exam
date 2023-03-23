@@ -2,8 +2,8 @@ package com.pobitecoding.project.controller.book;
 
 import com.pobitecoding.project.controller.main.MainController;
 import com.pobitecoding.project.util.BookUtil;
-import com.pobitecoding.project.util.CheckUtil;
 import com.pobitecoding.project.util.PrintUtil;
+import com.pobitecoding.project.util.ValidationUtil;
 
 public class BookController {
     
@@ -17,7 +17,7 @@ public class BookController {
          */
         int menu = MainController.scan.nextInt();
         MainController.scan.nextLine();    // Enter를 무시
-        if (CheckUtil.isInCorrectNumBook(menu)) return 0;
+        if (ValidationUtil.isInCorrectNum(menu, 0, 6)) return 0;
         
         /**
          * 0-0. 뒤로

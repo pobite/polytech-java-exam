@@ -1,5 +1,7 @@
 package com.pobitecoding.project.vo;
 
+import java.util.Date;
+
 public class MemberVO extends AbstractVO{
     
     private String name;

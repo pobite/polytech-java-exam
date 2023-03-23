@@ -1,9 +1,9 @@
 package com.pobitecoding.project.controller.customer;
 
 import com.pobitecoding.project.controller.main.MainController;
-import com.pobitecoding.project.util.CheckUtil;
 import com.pobitecoding.project.util.CustomerUtil;
 import com.pobitecoding.project.util.PrintUtil;
+import com.pobitecoding.project.util.ValidationUtil;
 
 public class CustomerController {
     
@@ -17,7 +17,7 @@ public class CustomerController {
          */
         int menu = MainController.scan.nextInt();
         MainController.scan.nextLine();    // Enter를 무시
-        if (CheckUtil.isInCorrectNumMember(menu)) return 0;
+        if (ValidationUtil.isInCorrectNum(menu, 0, 5)) return 0;
         
         /**
          * 0-0. 뒤로
