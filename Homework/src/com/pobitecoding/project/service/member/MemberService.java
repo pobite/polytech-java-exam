@@ -9,6 +9,8 @@ public interface MemberService {
 
     public boolean delete(int id);
 
+    public MemberVO read(int id);
+    
     public List<MemberVO> readAll();
     
 }

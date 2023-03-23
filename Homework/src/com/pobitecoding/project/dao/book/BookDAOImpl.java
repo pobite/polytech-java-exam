@@ -1,47 +1,44 @@
 package com.pobitecoding.project.dao.book;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 import com.pobitecoding.project.vo.BookVO;
-import com.pobitecoding.project.vo.MemberVO;
 
 public class BookDAOImpl implements BookDAO {
     
-    private List<BookVO> bookList;
+    private static int bookCount = 1;
+    
+    private Map<Integer, BookVO> dataSource;
     
     public BookDAOImpl() {
-        bookList = new ArrayList<>();
+        dataSource = new HashMap<>();
     }
 
     @Override
     public int create(BookVO bookVO) {
-        bookList.add(bookVO);
+        dataSource.put(bookCount++, bookVO);
         return 1;
     }
 
     @Override
     public int delete(int id) {
-        for (BookVO book : bookList) {
-            if (book.getId() == id) {
-                bookList.remove(book);
-                return 1;
-            }
-        }
-        return 0;
+        dataSource.remove(id);
+        return 1;
+        
     }
 
     @Override
     public BookVO read(int id) {
-        for (BookVO book : bookList) {
-            if (book.getId() == id) {
-                return book;
-            }
-        }
-        return null;
+        return dataSource.get(id);
     }
 
     @Override
     public List<BookVO> readAll() {
-        return bookList;
+        return dataSource.entrySet()
+                         .stream()
+                         .map(entry -> entry.getValue())
+                         .collect(Collectors.toList());
     }
 }

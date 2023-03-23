@@ -1,15 +1,13 @@
 package com.pobitecoding.project.vo;
 
-import java.util.Date;
-
 public class MemberVO extends AbstractVO{
     
     private String name;
-    private String gender;
+    private int gender;
     private String address;
     private String number;
-    private Date birthDate;
-    private Date joinDate;
+    private String birthDate;
+    private String joinDate;
     private BookBorrow bookLoan;
 
     public String getName() {
@@ -20,11 +18,11 @@ public class MemberVO extends AbstractVO{
         this.name = name;
     }
 
-    public String getGender() {
+    public int getGender() {
         return gender;
     }
 
-    public void setGender(String gender) {
+    public void setGender(int gender) {
         this.gender = gender;
     }
 
@@ -40,23 +38,23 @@ public class MemberVO extends AbstractVO{
         return number;
     }
 
-    public void setNumber() {
+    public void setNumber(String number) {
         this.number = number;
     }
 
-    public Date getBirthDate() {
+    public String getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(Date birthDate) {
+    public void setBirthDate(String birthDate) {
         this.birthDate = birthDate;
     }
 
-    public Date getJoinDate() {
+    public String getJoinDate() {
         return joinDate;
     }
 
-    public void setJoinDate(Date joinDate) {
+    public void setJoinDate(String joinDate) {
         this.joinDate = joinDate;
     }
 
@@ -66,5 +64,10 @@ public class MemberVO extends AbstractVO{
 
     public void setBookLoan(BookBorrow bookLoan) {
         this.bookLoan = bookLoan;
+    }
+
+    @Override
+    public String toString() {
+        return "User (name=" + name + ", id=" + super.getId() + ", gender=" + gender + ")";
     }
 }

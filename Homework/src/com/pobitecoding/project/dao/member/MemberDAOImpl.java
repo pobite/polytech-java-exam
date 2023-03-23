@@ -1,47 +1,46 @@
 package com.pobitecoding.project.dao.member;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import com.pobitecoding.project.vo.AbstractVO;
+import java.util.Map;
+import java.util.stream.Collectors;
+import com.pobitecoding.project.controller.BookController;
 import com.pobitecoding.project.vo.MemberVO;
 
 public class MemberDAOImpl implements MemberDAO {
     
-    private List<MemberVO> memberList;
+    private static int memberCount = 1;
+    
+    private Map<Integer, MemberVO> dataSource;
     
     public MemberDAOImpl() {
-        memberList = new ArrayList<>();
+        dataSource = new HashMap<>();
     }
 
     @Override
     public int create(MemberVO MemberVO) {
-        memberList.add(MemberVO);
+        MemberVO.setId(memberCount);
+        dataSource.put(memberCount++, MemberVO);
         return 1;
     }
 
     @Override
     public int delete(int id) {
-        for (MemberVO member : memberList) {
-            if (member.getId() == id) {
-                memberList.remove(member);
-                return 1;
-            }
-        }
-        return 0;
+        BookController.prviousMember = dataSource.get(id);
+        dataSource.remove(id);
+        return 1;
     }
 
     @Override
     public MemberVO read(int id) {
-        for (MemberVO member : memberList) {
-            if (member.getId() == id) {
-                return member;
-            }
-        }
-        return null;
+        return dataSource.get(id);
     }
 
     @Override
     public List<MemberVO> readAll() {
-        return memberList;
+        return dataSource.entrySet()
+                         .stream()
+                         .map(entry -> entry.getValue())
+                         .collect(Collectors.toList());
     }
 }

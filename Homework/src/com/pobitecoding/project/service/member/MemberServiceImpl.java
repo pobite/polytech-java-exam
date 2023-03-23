@@ -1,7 +1,7 @@
 package com.pobitecoding.project.service.member;
 
 import java.util.List;
-import com.pobitecoding.project.dao.MemberDAOImpl;
+import com.pobitecoding.project.dao.member.MemberDAOImpl;
 import com.pobitecoding.project.vo.MemberVO;
 
 public class MemberServiceImpl implements MemberService {
@@ -9,26 +9,26 @@ public class MemberServiceImpl implements MemberService {
     private MemberDAOImpl memberDAO;
     
     public MemberServiceImpl() {
-        bookDAO = new MemberDAOImpl();
+        memberDAO = new MemberDAOImpl();
     }
     
     @Override
     public boolean create(MemberVO memberVO) {
-        return bookDAO.create(memberVO) > 0;
+        return memberDAO.create(memberVO) > 0;
     }
-
-//    @Override
-//    public boolean update(int id, BookVO bookVO) {
-//        return bookDAO.update(id, bookVO) > 0;
-//    }
 
     @Override
     public boolean delete(int id) {
-        return bookDAO.delete(id) > 0;
+        return memberDAO.delete(id) > 0;
     }
 
     @Override
+    public MemberVO read(int id) {
+        return memberDAO.read(id);
+    }
+    
+    @Override
     public List<MemberVO> readAll() {
-        return bookDAO.readAll();
+        return memberDAO.readAll();
     }
 }
