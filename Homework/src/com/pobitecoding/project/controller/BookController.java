@@ -89,13 +89,13 @@ public class BookController {
             /**
              * 2. 도서관리
              */
-            else if (menu == 3) {
+            else if (menu == 2) {
                 
             }
             /**
              * 3. 종료
              */
-            else if (menu == 4) {
+            else if (menu == 3) {
                 System.out.println("종료합니다.");
                 break;
             }
