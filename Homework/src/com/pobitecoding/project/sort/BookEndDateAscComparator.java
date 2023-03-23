@@ -7,6 +7,6 @@ public class BookEndDateAscComparator implements Comparator<BookVO>{
 
     @Override
     public int compare(BookVO o1, BookVO o2) {
-        return o1.getBookLoan().getEndDate().compareTo(o2.getBookLoan().getEndDate());
+        return o1.getBookBorrow().getEndDate().compareTo(o2.getBookBorrow().getEndDate());
     }
 }

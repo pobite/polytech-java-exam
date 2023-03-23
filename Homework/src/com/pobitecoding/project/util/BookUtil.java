@@ -8,6 +8,7 @@ import com.pobitecoding.project.controller.main.MainController;
 import com.pobitecoding.project.sort.BookAuthorAscComparator;
 import com.pobitecoding.project.sort.BookEndDateAscComparator;
 import com.pobitecoding.project.sort.BookPublicationDateAscComparator;
+import com.pobitecoding.project.sort.BookPublisherAscComparator;
 import com.pobitecoding.project.sort.BookTitleAscComparator;
 import com.pobitecoding.project.vo.BookVO;
 import com.pobitecoding.project.vo.MemberVO;
@@ -24,33 +25,33 @@ public abstract class BookUtil {
         if (bookList.size() != 0) {
             
             System.out.println("조회 기준을 선택해주세요:");
-            List<String> types = Arrays.asList("1. 마감일", "2. 출간일", "3. 도서명", "4. 저자", "5. 출판사");
+            List<String> types = Arrays.asList("1. 출간일", "2. 도서명", "3. 저자", "4. 출판사");
             for (String type : types) {
                 System.out.println(type);
             }
             
             int menu = MainController.scan.nextInt();
-            if (ValidationUtil.isInCorrectNum(menu, 1, 5)) return 0;
+            if (ValidationUtil.isInCorrectNum(menu, 1, 4)) return 0;
             
             switch (menu) {
                 case 1 :
-                    bookList.sort(new BookEndDateAscComparator());
-                    System.out.println("마감일 기준으로 정렬되었습니다");
-                    break;
-                case 2 :
                     bookList.sort(new BookPublicationDateAscComparator());
                     System.out.println("출간일 기준으로 정렬되었습니다");
                     break;
-                case 3 :
+                case 2 :
                     bookList.sort(new BookTitleAscComparator());
                     System.out.println("도서명 기준으로 정렬되었습니다");
                     break;
-                case 4 :
+                case 3 :
                     bookList.sort(new BookAuthorAscComparator());
                     System.out.println("저자명 기준으로 정렬되었습니다");
                     break;
+                case 4 :
+                    bookList.sort(new BookPublisherAscComparator());
+                    System.out.println("출판사명 기준으로 정렬되었습니다");
+                    break;
                 default :
-                    System.out.println("잘못된 입력을 정렬되지 않았습니다");
+                    System.out.println("잘못된 입력으로 정렬되지 않았습니다");
                     break;
             }
             
@@ -160,7 +161,7 @@ public abstract class BookUtil {
                     break;
                 case 4 :
                     boolean isPossible = false;
-                    isPossible = vo.getBookLoan().isPossibleBorrow();
+                    isPossible = vo.getBookBorrow().isPossibleBorrow();
                     
                     if (isPossible) {
                         System.out.println(vo.getTitle() + "는 \"대출 가능\" 상태입니다.");
@@ -173,7 +174,7 @@ public abstract class BookUtil {
                     String answer = MainController.scan.nextLine();
                     
                     if (answer.equalsIgnoreCase("Y")) {
-                        vo.getBookLoan().setPossibleBorrow(!isPossible); 
+                        vo.getBookBorrow().setPossibleBorrow(!isPossible); 
                     }
                     else {
                         System.out.println("변경을 취소합니다");
@@ -198,7 +199,7 @@ public abstract class BookUtil {
         
         if (bookList.size() != 0) {
             for (BookVO book : bookList) {
-                if (book.getBookLoan().isPossibleBorrow()) {
+                if (book.getBookBorrow().isPossibleBorrow()) {
                     System.out.println("ID: " + book.getId() + ", " + book.getTitle() + "의 책이 \"대출 가능\"합니다");
                 }
                 else {
@@ -238,7 +239,7 @@ public abstract class BookUtil {
      */
     public static void deleteRollback() {
         
-        if (MainController.prviousBook != null) {
+        if (MainController.prviousBook.getId() != 0) {
             MainController.bookService.create(MainController.prviousBook);
             System.out.println(MainController.prviousBook.getTitle() + " 책이 복구되었습니다.");
         }

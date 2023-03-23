@@ -20,6 +20,10 @@ public abstract class CustomerUtil {
         memberList.sort(new MemberAgeAscComparator());
         
         if (memberList.size() != 0) {
+            
+            System.out.println("회원은 나이순으로 정렬됩니다");
+            memberList.sort(new MemberAgeAscComparator());
+            
             for (MemberVO member : memberList) {
                 System.out.println(member.toString());
             }
@@ -116,8 +120,6 @@ public abstract class CustomerUtil {
             MainController.scan.nextLine();
             if (ValidationUtil.isInCorrectNum(type, 1, 5)) return 0;
 
-            
-            
             switch (type) {
                 case 1 :
                     System.out.println("변경할 성함을 입력하세요:");
@@ -162,7 +164,6 @@ public abstract class CustomerUtil {
         return 0;
     }
 
-    
     /**
      * 회원 삭제
      * id를 기준으로 한 명의 회원을 삭제합니다.
@@ -189,7 +190,8 @@ public abstract class CustomerUtil {
      * 이전 회원삭제 명령을 취소합니다.
      */
     public static void deleteRollback() {
-        if (MainController.memberService != null) {
+        
+        if (MainController.prviousMember.getId() != 0) {
             MainController.memberService.create(MainController.prviousMember);
             System.out.println(MainController.prviousMember.getName() + " 회원이 복구되었습니다.");
         }
