@@ -20,9 +20,8 @@ public abstract class CustomerUtil {
         memberList.sort(new MemberAgeAscComparator());
         
         if (memberList.size() != 0) {
-            
-            System.out.println("회원은 나이순으로 정렬됩니다");
             memberList.sort(new MemberAgeAscComparator());
+            System.out.println("나이순으로 정렬되었습니다.");
             
             for (MemberVO member : memberList) {
                 System.out.println(member.toString());
@@ -45,14 +44,17 @@ public abstract class CustomerUtil {
         
         System.out.println("회원의 성별을 입력하세요:");
         System.out.println("(0: 남자, 1: 여자, 2: 기타)");
-        int gender = MainController.scan.nextInt();
-        MainController.scan.nextLine();
-        if (ValidationUtil.isInCorrectNum(gender, 1, 5)) return 0;
-
+        String genderStr = MainController.scan.nextLine();
+        
+        if (ValidationUtil.isNotNum(genderStr)) return 0;
+        int genderInt = Integer.parseInt(genderStr);
+        
+        if (ValidationUtil.isInCorrectNum(genderInt, 0, 2)) return 0;
         
         System.out.println("회원의 생년월일을 입력하세요:");
-        System.out.println("ex. yyyy/mm/dd");
+        System.out.println("ex. yyyy/MM/dd");
         String birthString = MainController.scan.nextLine();
+        if (ValidationUtil.isNotDate(birthString)) return 0;
 
         System.out.println("회원의 주소를 입력하세요:");
         String address = MainController.scan.nextLine();
@@ -60,6 +62,7 @@ public abstract class CustomerUtil {
         System.out.println("회원의 번호를 입력하세요:");
         System.out.println("ex. '-' 없이 사용바랍니다.");
         String number = MainController.scan.nextLine();
+        if (ValidationUtil.isNotNum(number)) return 0;
         
         Date now = new Date();
         SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
@@ -67,18 +70,17 @@ public abstract class CustomerUtil {
         
         int age = Integer.parseInt(nowString.substring(0, 4)) - Integer.parseInt(birthString.substring(0, 4));
         
-        
         MemberVO vo = new MemberVO();
         vo.setName(name);
-        vo.setGender(gender);
+        vo.setGender(genderInt);
         vo.setBirthDate(birthString);
         vo.setAddress(address);
         vo.setNumber(number);
-        vo.setBirthDate(nowString);
+        vo.setJoinDate(nowString);
         vo.setAge(age);
         
         if (MainController.memberService.create(vo)) {
-            System.out.println(name + "회원이 등록되었습니다.");
+            System.out.println("\"" + name + "\" 회원님이 등록되었습니다.");
         }
         return 0;
     }
@@ -129,9 +131,13 @@ public abstract class CustomerUtil {
                     break;
                 case 2 :
                     System.out.println("변경할 성별을 입력하세요:");
-                    int gender = MainController.scan.nextInt();
-                    MainController.scan.nextLine();
-                    vo.setGender(gender);
+                    System.out.println("(0: 남자, 1: 여자, 2: 기타)");
+                    String genderStr = MainController.scan.nextLine();
+                    
+                    if (ValidationUtil.isNotNum(genderStr)) return 0;
+                    int genderInt = Integer.parseInt(genderStr);
+                    
+                    vo.setGender(genderInt);
                     isSuccess = true;
                     break;
                 case 3 :
@@ -142,7 +148,10 @@ public abstract class CustomerUtil {
                     break;
                 case 4 :
                     System.out.println("변경할 번호를 입력하세요:");
+                    System.out.println("ex. '-' 없이 사용바랍니다.");
                     String number = MainController.scan.nextLine();
+                    if (ValidationUtil.isNotNum(number)) return 0;
+                    
                     vo.setNumber(number);
                     isSuccess = true;
                     break;
@@ -150,6 +159,7 @@ public abstract class CustomerUtil {
                     System.out.println("변경할 생일을 입력하세요:");
                     System.out.println("ex. yyyy/mm/dd");
                     String birthString = MainController.scan.nextLine();
+                    if (ValidationUtil.isNotDate(birthString)) return 0;
                     vo.setNumber(birthString);
                     isSuccess = true;
                     break;

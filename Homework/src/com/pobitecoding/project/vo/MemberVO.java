@@ -83,7 +83,7 @@ public class MemberVO extends AbstractVO{
 
     @Override
     public String toString() {
-        return "나이순으로 정렬되었습니다.\n" + "ID: " + super.getId() + ", 성함: " + name + ", 나이:" + age + ", 성별:" + gender
+        return "ID: " + super.getId() + ", 성함: " + name + ", 나이:" + age + ", 성별:" + gender
                     + ", 주소:" + address + ", 번호:" + number + ", 생년월일:" 
                     + birthDate + ", 가입날짜:" + joinDate;
     }

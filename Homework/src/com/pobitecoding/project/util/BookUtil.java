@@ -7,7 +7,7 @@ import java.util.List;
 import com.pobitecoding.project.controller.main.MainController;
 import com.pobitecoding.project.sort.BookAuthorAscComparator;
 import com.pobitecoding.project.sort.BookEndDateAscComparator;
-import com.pobitecoding.project.sort.BookPublicationDateAscComparator;
+import com.pobitecoding.project.sort.BookPublicationDateDescComparator;
 import com.pobitecoding.project.sort.BookPublisherAscComparator;
 import com.pobitecoding.project.sort.BookTitleAscComparator;
 import com.pobitecoding.project.vo.BookVO;
@@ -35,7 +35,7 @@ public abstract class BookUtil {
             
             switch (menu) {
                 case 1 :
-                    bookList.sort(new BookPublicationDateAscComparator());
+                    bookList.sort(new BookPublicationDateDescComparator());
                     System.out.println("출간일 기준으로 정렬되었습니다");
                     break;
                 case 2 :
@@ -71,7 +71,7 @@ public abstract class BookUtil {
      * 
      * Input: title, author, publisher
      */
-    public static void join() {
+    public static int join() {
         System.out.println("도서명을 입력하세요:");
         String title = MainController.scan.nextLine();
         
@@ -84,6 +84,8 @@ public abstract class BookUtil {
         System.out.println("출판일을 입력하세요:");
         System.out.println("ex. yyyy/mm/dd");
         String publicationDate = MainController.scan.nextLine();
+        if (ValidationUtil.isNotDate(publicationDate)) return 0;
+
         
         Date now = new Date();
         SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
@@ -99,6 +101,7 @@ public abstract class BookUtil {
         if (MainController.bookService.create(vo)) {
             System.out.println("\"" + title + "\" 책이 등록되었습니다.");
         }
+        return 0;
     }
     
     /**
@@ -127,7 +130,6 @@ public abstract class BookUtil {
             boolean isSuccess = false;
             
             List<String> types = Arrays.asList("1. 도서명", "2. 저자", "3. 출판사", "4. 대출 여부");
-            
             for (String type : types) {
                 System.out.println(type);
             }
@@ -177,7 +179,7 @@ public abstract class BookUtil {
                         vo.getBookBorrow().setPossibleBorrow(!isPossible); 
                     }
                     else {
-                        System.out.println("변경을 취소합니다");
+                        System.out.println("변경을 선택하지 않았습니다");
                     }
                 default :
                     System.out.println("잘못된 입력");

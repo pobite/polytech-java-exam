@@ -27,8 +27,14 @@ public abstract class ValidationUtil {
      * @param input String 타입의 문자열
      * @return
      */
-    public static boolean isNumber(String input) {
-        return Pattern.matches("^[0-9]*$", input) ? true : false;
+    public static boolean isNotNum(String input) {
+        if (Pattern.matches("^[0-9]*$", input)) {
+            return false;
+        }
+        else {
+            System.out.println("잘못된 입력입니다");
+            return true;
+        }
     }
     
     /**
@@ -37,8 +43,14 @@ public abstract class ValidationUtil {
      * @param input String 타입의 문자열
      * @return
      */
-    public static boolean isText(String input) {
-        return Pattern.matches("^[a-zA-Z]*$ ", input) ? true : false;
+    public static boolean isNotText(String input) {
+        if (Pattern.matches("^[a-zA-Z]*$ ", input)) {
+            return false;
+        }
+        else {
+            System.out.println("잘못된 입력입니다");
+            return true;
+        }
     }
     
     /**
@@ -48,16 +60,17 @@ public abstract class ValidationUtil {
      * @param checkDate String 타입의 날짜 문자
      * @return
      */
-    public static boolean isDate(String checkDate) {
+    public static boolean isNotDate(String checkDate) {
         
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
         
         format.setLenient(false);
         try {
             format.parse(checkDate);
-            return true;
-        } catch (ParseException e) {
             return false;
+        } catch (ParseException e) {
+            System.out.println("잘못된 입력입니다");
+            return true;
         }
     }
 }
