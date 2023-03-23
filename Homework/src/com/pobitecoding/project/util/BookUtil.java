@@ -5,6 +5,10 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import com.pobitecoding.project.controller.main.MainController;
+import com.pobitecoding.project.sort.BookAuthorAscComparator;
+import com.pobitecoding.project.sort.BookEndDateAscComparator;
+import com.pobitecoding.project.sort.BookPublicationDateAscComparator;
+import com.pobitecoding.project.sort.BookTitleAscComparator;
 import com.pobitecoding.project.vo.BookVO;
 import com.pobitecoding.project.vo.MemberVO;
 
@@ -18,6 +22,41 @@ public abstract class BookUtil {
         List<BookVO> bookList = MainController.bookService.readAll();
         
         if (bookList.size() != 0) {
+            
+            System.out.println("정렬 기준을 선택하세요:");
+            int sortType = MainController.scan.nextInt();
+            
+            List<String> types = Arrays.asList("1. 마감일", "2. 출간일", "3. 도서명", "4. 저자", "5. 출판사");
+            for (String type : types) {
+                System.out.println(type);
+            }
+            
+            System.out.println("변경할 타입을 선택하세요:");
+            int type = MainController.scan.nextInt();
+            MainController.scan.nextLine();
+            
+            switch (type) {
+                case 1 :
+                    bookList.sort(new BookEndDateAscComparator());
+                    System.out.println("마감일 기준으로 정렬되었습니다");
+                    break;
+                case 2 :
+                    bookList.sort(new BookPublicationDateAscComparator());
+                    System.out.println("출간일 기준으로 정렬되었습니다");
+                    break;
+                case 3 :
+                    bookList.sort(new BookTitleAscComparator());
+                    System.out.println("도서명 기준으로 정렬되었습니다");
+                    break;
+                case 4 :
+                    bookList.sort(new BookAuthorAscComparator());
+                    System.out.println("저자명 기준으로 정렬되었습니다");
+                    break;
+                default :
+                    System.out.println("잘못된 입력을 정렬되지 않았습니다");
+                    break;
+            }
+            
             for (BookVO book : bookList) {
                 System.out.println(book.toString());
             }
@@ -43,6 +82,9 @@ public abstract class BookUtil {
         System.out.println("출판사를 입력하세요:");
         String publisher = MainController.scan.nextLine();
         
+        System.out.println("출판일을 입력하세요:");
+        System.out.println("ex. yyyy/mm/dd");
+        String publicationDate = MainController.scan.nextLine();
         
         Date now = new Date();
         SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
@@ -54,6 +96,7 @@ public abstract class BookUtil {
         vo.setAuthor(author);
         vo.setPublisher(publisher);
         vo.setRegistrationDate(nowString);
+        vo.setPublicationDate(publicationDate);
         
         if (MainController.bookService.create(vo)) {
             System.out.println(title + "책이 등록되었습니다.");

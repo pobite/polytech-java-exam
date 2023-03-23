@@ -5,9 +5,17 @@ public class BookVO extends AbstractVO {
     private String title;
     private String author;
     private String publisher;
+    private String publicationDate;
     private String registrationDate;
     private BookBorrow bookBorrow;
     
+    
+    public String getPublicationDate() {
+        return publicationDate;
+    }
+    public void setPublicationDate(String publicationDate) {
+        this.publicationDate = publicationDate;
+    }
     public String getTitle() {
         return title;
     }

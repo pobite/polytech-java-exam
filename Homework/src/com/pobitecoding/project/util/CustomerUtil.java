@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import com.pobitecoding.project.controller.main.MainController;
+import com.pobitecoding.project.sort.MemberAgeAscComparator;
 import com.pobitecoding.project.vo.MemberVO;
 
 public abstract class CustomerUtil {
@@ -15,6 +16,8 @@ public abstract class CustomerUtil {
      */
     public static void search() {
         List<MemberVO> memberList = MainController.memberService.readAll();
+        
+        memberList.sort(new MemberAgeAscComparator());
         
         if (memberList.size() != 0) {
             for (MemberVO member : memberList) {
