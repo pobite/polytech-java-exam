@@ -3,15 +3,15 @@ package com.pobitecoding.project.controller;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
-import com.pobitecoding.project.service.BookService;
-import com.pobitecoding.project.service.BookServiceImpl;
+import com.pobitecoding.project.service.member.MemberService;
+import com.pobitecoding.project.service.member.MemberServiceImpl;
 import com.pobitecoding.project.util.BookUtil;
 
 public class BookController {
     
     public static void main(String[] args) {
         
-        BookService service = new BookServiceImpl();
+        MemberService service = new MemberServiceImpl();
         
         /**
          * 처음 출력문
@@ -45,6 +45,7 @@ public class BookController {
             int menu = scan.nextInt();
             scan.nextLine();    // Enter를 무시
             
+            if (BookUtil.isInCorrectNumFirst(menu)) continue;
             
             /**
              * 회원관리
@@ -52,26 +53,28 @@ public class BookController {
             if (menu == 0) {
                 
                 BookUtil.printSecondMenu();
+                
                 /**
                  * 입력 받아 menu에 저장
                  */
                 menu = scan.nextInt();
                 scan.nextLine();    // Enter를 무시
                 
-                if (BookUtil.isInCorrectNumber(menu)) break;
+                if (BookUtil.isInCorrectNumSecond(menu)) continue;
                 
                 /**
-                 * 등록
+                 * 뒤로
                  */
                 if (menu == 0) {
                     break;
                 }
+                
                 /**
                  * 회원조회
                  */
                 else if (menu == 1) {
 
-                    System.out.println("등록할 메뉴 타입을 입력하세요(숫자): ");
+                    System.out.println("조회할 id를 입력하세요.");
 
                     /**
                      * key: 고객의 입력 값

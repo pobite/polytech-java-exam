@@ -1,29 +1,35 @@
 package com.pobitecoding.project.vo;
 
-public class BookVO {
+public class BookVO extends AbstractVO {
     
-    private String name;
-    private int id;
-    private String gender;
-    
-    public String getName() {
-        return name;
-    }
-    public int getId() {
-        return id;
-    }
-    public String getGender() {
-        return gender;
-    }
-    public void setName(String name) {
-        this.name = name;
-    }
-    public void setId(int id) {
-        this.id = id;
-    }
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
+    private String title;
+    private String author;
+    private String publisher;
+    private BookBorrow bookBorrow;
     
     
+    public String getTitle() {
+        return title;
+    }
+    public void setTitle(String title) {
+        this.title = title;
+    }
+    public String getAuthor() {
+        return author;
+    }
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+    public String getPublisher() {
+        return publisher;
+    }
+    public void setPublisher(String publisher) {
+        this.publisher = publisher;
+    }
+    public BookBorrow getBookLoan() {
+        return bookBorrow;
+    }
+    public void setBookLoan(BookBorrow bookBorrow) {
+        this.bookBorrow = bookBorrow;
+    }
 }
