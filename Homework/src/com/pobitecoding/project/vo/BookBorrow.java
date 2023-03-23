@@ -9,7 +9,6 @@ public class BookBorrow {
     private Date startDate;
     private Date endDate;
     
-    
     public boolean isPossibleBorrow() {
         return isPossibleBorrow;
     }

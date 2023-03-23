@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-import com.pobitecoding.project.controller.BookController;
+import com.pobitecoding.project.controller.main.MainController;
 import com.pobitecoding.project.vo.MemberVO;
 
 public class MemberDAOImpl implements MemberDAO {
@@ -18,15 +18,15 @@ public class MemberDAOImpl implements MemberDAO {
     }
 
     @Override
-    public int create(MemberVO MemberVO) {
-        MemberVO.setId(memberCount);
-        dataSource.put(memberCount++, MemberVO);
+    public int create(MemberVO memberVO) {
+        memberVO.setId(memberCount);
+        dataSource.put(memberCount++, memberVO);
         return 1;
     }
 
     @Override
     public int delete(int id) {
-        BookController.prviousMember = dataSource.get(id);
+        MainController.prviousMember = dataSource.get(id);
         dataSource.remove(id);
         return 1;
     }

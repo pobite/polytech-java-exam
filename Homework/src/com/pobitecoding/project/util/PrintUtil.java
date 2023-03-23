@@ -9,7 +9,7 @@ public abstract class PrintUtil {
      * 2. 도서관리
      * 3. 종료
      */
-    public static void firstMenu() {
+    public static void mainMenu() {
         System.out.println("\n============================\r\n"
                 + "1. 회원관리\r\n"
                 + "2. 도서관리\r\n"
@@ -27,7 +27,7 @@ public abstract class PrintUtil {
      * 4. 회원삭제
      * 5. 삭제취소
      */
-    public static void secondMenu() {
+    public static void memberMenu() {
         
         System.out.println("\n============================\r\n"
                 + "0. 뒤로\r\n"
@@ -38,5 +38,19 @@ public abstract class PrintUtil {
                 + "5. 삭제취소\r\n"
                 + "============================\n");
     }
+    
+    public static void bookMenu() {
+        
+        System.out.println("\n============================\r\n"
+                + "0. 뒤로\r\n"
+                + "1. 도서조회\r\n"
+                + "2. 도서등록\r\n"
+                + "3. 도서수정\r\n"
+                + "4. 도서대출\r\n"
+                + "5. 도서삭제\r\n"
+                + "6. 삭제취소\r\n"
+                + "============================\n");
+    }
+    
     
 }

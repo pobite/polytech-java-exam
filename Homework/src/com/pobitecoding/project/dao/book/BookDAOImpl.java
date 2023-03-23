@@ -18,6 +18,7 @@ public class BookDAOImpl implements BookDAO {
 
     @Override
     public int create(BookVO bookVO) {
+        bookVO.setId(bookCount);
         dataSource.put(bookCount++, bookVO);
         return 1;
     }
