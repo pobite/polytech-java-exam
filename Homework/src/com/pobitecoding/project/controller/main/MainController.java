@@ -49,7 +49,8 @@ public class MainController {
              * 3. 종료
              */
             else if (menu == 3) {
-                System.out.println("종료합니다.");
+                System.out.println("종료를 누르셨습니다.");
+                System.out.println("이용해주셔서 감사합니다.");
                 break;
             }
         }

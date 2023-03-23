@@ -12,7 +12,7 @@ public abstract class ValidationUtil {
      */
     public static boolean isInCorrectNum(int input, int start, int end) {
         if (start > input || input > end) {
-            System.out.println("잘못된 입력");
+            System.out.println("잘못된 입력입니다");
             return true;
         }
         return false;

@@ -11,7 +11,11 @@ public class MemberVO extends AbstractVO{
     private String number;
     private String birthDate;
     private String joinDate;
-    private BookBorrow bookLoan;
+    private BookBorrow bookBorrow;
+    
+    public MemberVO() {
+        bookBorrow = new BookBorrow();
+    }
     
     public int getAge() {
         return age;
@@ -70,16 +74,16 @@ public class MemberVO extends AbstractVO{
     }
 
     public BookBorrow getBookLoan() {
-        return bookLoan;
+        return bookBorrow;
     }
 
     public void setBookLoan(BookBorrow bookLoan) {
-        this.bookLoan = bookLoan;
+        this.bookBorrow = bookLoan;
     }
 
     @Override
     public String toString() {
-        return "ID: " + super.getId() + ", 성함: " + name + ", 나이:" + age + ", 성별:" + gender
+        return "나이순으로 정렬되었습니다.\n" + "ID: " + super.getId() + ", 성함: " + name + ", 나이:" + age + ", 성별:" + gender
                     + ", 주소:" + address + ", 번호:" + number + ", 생년월일:" 
                     + birthDate + ", 가입날짜:" + joinDate;
     }

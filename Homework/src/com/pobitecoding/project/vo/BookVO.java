@@ -9,6 +9,9 @@ public class BookVO extends AbstractVO {
     private String registrationDate;
     private BookBorrow bookBorrow;
     
+    public BookVO() {
+        bookBorrow = new BookBorrow();
+    }
     
     public String getPublicationDate() {
         return publicationDate;
@@ -50,6 +53,6 @@ public class BookVO extends AbstractVO {
     @Override
     public String toString() {
         return "ID: " + super.getId() + ", 제목: " + title + ", 저자:" + author + ", 출판사:" + publisher
-                + ", 등록일: " + registrationDate;
+                + ", 등록일: " + registrationDate + ", 대출 여부: " + getBookLoan().isPossibleBorrow();
     }
 }

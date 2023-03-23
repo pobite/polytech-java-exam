@@ -23,21 +23,16 @@ public abstract class BookUtil {
         
         if (bookList.size() != 0) {
             
-            System.out.println("정렬 기준을 선택하세요:");
-            int menu = MainController.scan.nextInt();
-            
+            System.out.println("조회 기준을 선택해주세요:");
             List<String> types = Arrays.asList("1. 마감일", "2. 출간일", "3. 도서명", "4. 저자", "5. 출판사");
             for (String type : types) {
                 System.out.println(type);
             }
             
+            int menu = MainController.scan.nextInt();
             if (ValidationUtil.isInCorrectNum(menu, 1, 5)) return 0;
             
-            System.out.println("변경할 타입을 선택하세요:");
-            int type = MainController.scan.nextInt();
-            MainController.scan.nextLine();
-            
-            switch (type) {
+            switch (menu) {
                 case 1 :
                     bookList.sort(new BookEndDateAscComparator());
                     System.out.println("마감일 기준으로 정렬되었습니다");
@@ -92,7 +87,6 @@ public abstract class BookUtil {
         Date now = new Date();
         SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
         String nowString = format.format(now);
-        System.out.println(nowString);
         
         BookVO vo = new BookVO();
         vo.setTitle(title);
@@ -102,7 +96,7 @@ public abstract class BookUtil {
         vo.setPublicationDate(publicationDate);
         
         if (MainController.bookService.create(vo)) {
-            System.out.println(title + "책이 등록되었습니다.");
+            System.out.println("\"" + title + "\" 책이 등록되었습니다.");
         }
     }
     
