@@ -44,15 +44,21 @@ public class BookController {
             BookUtil.edit();
         }
         /**
-         * 0-4. 도서삭제
+         * 0-4. 도서대출
          */
         else if (menu == 4) {
+            BookUtil.loan();
+        }
+        /**
+         * 0-5. 도서삭제
+         */
+        else if (menu == 5) {
             BookUtil.delete();
         }
         /**
-         * 0-5. 삭제취소
+         * 0-6. 삭제취소
          */
-        else if (menu == 5) {
+        else if (menu == 6) {
             BookUtil.deleteRollback();
         }
         return 0;
