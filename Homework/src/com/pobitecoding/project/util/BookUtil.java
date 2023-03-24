@@ -260,6 +260,8 @@ public abstract class BookUtil {
                 break;
             case 3 :
                 System.out.println("현재 구현 중에 있습니다. 잠시만 기다려 주세요");
+//                search();
+//                System.out.println("대출 가능한");
                 break;
         }
         return 0;
