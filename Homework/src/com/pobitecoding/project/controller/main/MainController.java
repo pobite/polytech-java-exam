@@ -25,7 +25,8 @@ public class MainController {
         CustomerController customerCon = new CustomerController();
         BookController bookCon = new BookController();
         
-        while(true) {
+        boolean isExit = false;
+        while(!isExit) {
                         
             PrintUtil.mainMenu();
             
@@ -51,7 +52,7 @@ public class MainController {
             else if (menu == 3) {
                 System.out.println("종료를 누르셨습니다.");
                 System.out.println("이용해주셔서 감사합니다.");
-                break;
+                isExit = false;
             }
         }
     }
