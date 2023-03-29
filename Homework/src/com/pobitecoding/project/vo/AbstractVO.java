@@ -1,6 +1,6 @@
 package com.pobitecoding.project.vo;
 
-public class AbstractVO {
+abstract class AbstractVO {
     
     private int id;
 
