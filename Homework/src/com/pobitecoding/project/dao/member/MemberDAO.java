@@ -1,7 +1,6 @@
 package com.pobitecoding.project.dao.member;
 
 import java.util.List;
-import com.pobitecoding.project.vo.AbstractVO;
 import com.pobitecoding.project.vo.MemberVO;
 
 public interface MemberDAO {

@@ -1,13 +1,13 @@
 package com.pobitecoding.project.service.book;
 
 import java.util.List;
+import com.pobitecoding.project.dao.book.BookDAO;
 import com.pobitecoding.project.dao.book.BookDAOImpl;
-import com.pobitecoding.project.dao.member.MemberDAOImpl;
 import com.pobitecoding.project.vo.BookVO;
 
 public class BookServiceImpl implements BookService{
     
-    private BookDAOImpl bookDAO;
+    private BookDAO bookDAO;
     
     public BookServiceImpl() {
         bookDAO = new BookDAOImpl();

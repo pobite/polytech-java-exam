@@ -1,12 +1,13 @@
 package com.pobitecoding.project.service.member;
 
 import java.util.List;
+import com.pobitecoding.project.dao.member.MemberDAO;
 import com.pobitecoding.project.dao.member.MemberDAOImpl;
 import com.pobitecoding.project.vo.MemberVO;
 
 public class MemberServiceImpl implements MemberService {
     
-    private MemberDAOImpl memberDAO;
+    private MemberDAO memberDAO;
     
     public MemberServiceImpl() {
         memberDAO = new MemberDAOImpl();
