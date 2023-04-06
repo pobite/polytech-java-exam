@@ -2,7 +2,9 @@ package com.polytech.data.jdbc;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class JDBC {
     
@@ -18,8 +20,16 @@ public class JDBC {
             String user = "scott";
             String passwd = "tiger";
             conn = DriverManager.getConnection(url, user, passwd);
-            System.out.println(conn);
-        
+            
+            // 3. SQL 쿼리를 실행합니다.
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM CUSTOMER");
+            
+            // 4. 쿼리 결과를 처리합니다.
+            while (rs.next()) {
+               System.out.println(rs.getString("ID") + " " + rs.getString("PWD"));
+            }
+            
         } catch (ClassNotFoundException e) {
             // 드라이버 로드 중 예외가 발생한 경우 처리합니다.
             e.printStackTrace();
