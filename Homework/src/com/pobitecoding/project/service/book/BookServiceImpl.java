@@ -37,4 +37,9 @@ public class BookServiceImpl implements BookService{
     public List<BookVO> readBorrow() {
         return bookDAO.readBorrow();
     }
+
+    @Override
+    public List<BookVO> readLoan() {
+        return bookDAO.readLoan();
+    }
 }

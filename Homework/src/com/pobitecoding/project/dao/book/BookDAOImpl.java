@@ -52,5 +52,14 @@ public class BookDAOImpl implements BookDAO {
                          .collect(Collectors.toList());
     }
 
+    @Override
+    public List<BookVO> readLoan() {
+        return dataSource.entrySet()
+                .stream()
+                .filter(entry -> entry.getValue().getBookBorrow().isPossibleBorrow() == false)
+                .map(entry -> entry.getValue())
+                .collect(Collectors.toList());
+    }
+
 
 }

@@ -15,5 +15,6 @@ public interface BookService {
     public List<BookVO> readAll();
     
     public List<BookVO> readBorrow();
-
+    
+    public List<BookVO> readLoan();
 }

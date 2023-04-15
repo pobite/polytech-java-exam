@@ -1,6 +1,10 @@
 package com.pobitecoding.project.util;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -196,7 +200,7 @@ public abstract class BookUtil {
      */
     public static int loan() {
         
-        List<String> types = Arrays.asList("1. 대출조회", "2. 대출연장", "3. 대출승인");
+        List<String> types = Arrays.asList("1. 대출 가능 도서 조회", "2. 대출 진행 도서 조회 ", "3. 대출신청", "4. 대출연장");
         for (String type : types) {
             System.out.println(type);
         }
@@ -205,24 +209,38 @@ public abstract class BookUtil {
         int type = MainController.scan.nextInt();
         MainController.scan.nextLine();
         
-        if (ValidationUtil.isInCorrectNum(type, 1, 3)) return 0;
+        if (ValidationUtil.isInCorrectNum(type, 1, 4)) return 0;
             
         switch (type) {
             case 1 :
                 List<BookVO> bookList = MainController.bookService.readBorrow();
                 
                 if (bookList.size() != 0) {
-                    bookList.sort(new BookEndDateDescComparator());
-                    System.out.println("최근 출간한 순서로 정렬됩니다.");
+                    bookList.sort(new BookPublicationDateDescComparator());
+                    System.out.println("대출 가능한 도서의 목록입니다.(최근 출간순)");
                     for (BookVO book : bookList) {
                         System.out.println(book.toString());
                     }
                 }
                 else {
-                    System.out.println("현재 대출 가능한 책이 없습니다.");
+                    System.out.println("현재 대출 가능한 도서가 없습니다.");
                 }
                 break;
             case 2 :
+                List<BookVO> bookListLoan = MainController.bookService.readLoan();
+                
+                if (bookListLoan.size() != 0) {
+                    bookListLoan.sort(new BookEndDateDescComparator());
+                    System.out.println("현재 대출 중인 도서입니다.(대출 마감일순)");
+                    for (BookVO book : bookListLoan) {
+                        System.out.println(book.toString());
+                    }
+                }
+                else {
+                    System.out.println("현재 대출 중인 도서가 없습니다.");
+                }
+                break;
+            case 3 :
                 System.out.println("대출 연장할 도서의 id를 입력하세요:");
                 int id = MainController.scan.nextInt();
                 MainController.scan.nextLine();
@@ -246,8 +264,12 @@ public abstract class BookUtil {
                         
                         if (answer.equalsIgnoreCase("Y")) {
                             vo.getBookBorrow().setPossibleExtend(false);
-                            
-                            // 1주 연장되게 구현 
+                            String dateString = vo.getBookBorrow().getEndDate();
+                            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+                            LocalDate date = LocalDate.parse(dateString, formatter);
+                            LocalDate extendedDate = date.plusWeeks(1);
+                            String extendedDateString = extendedDate.format(formatter);
+                            vo.getBookBorrow().setEndDate(extendedDateString);
                         }
                         else {
                             System.out.println("변경을 선택하지 않았습니다");
@@ -258,9 +280,8 @@ public abstract class BookUtil {
                     }
                 }
                 break;
-            case 3 :
-                System.out.println("현재 구현 중에 있습니다. 잠시만 기다려 주세요");
-//                search();
+            case 4 :
+                System.out.println("대출 가능한 책의 리스트입니다.");
 //                System.out.println("대출 가능한");
                 break;
         }
