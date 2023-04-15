@@ -27,7 +27,16 @@ public class MainController {
         
         boolean isExit = false;
         while(!isExit) {
-                        
+            
+            PrintUtil.modeMenu();
+            
+            int mode = scan.nextInt();
+            scan.nextLine();    // Enter를 무시
+            
+            if (ValidationUtil.isInCorrectNum(mode, 1, 2)) continue;
+            
+            
+            
             PrintUtil.mainMenu();
             
             int menu = scan.nextInt();

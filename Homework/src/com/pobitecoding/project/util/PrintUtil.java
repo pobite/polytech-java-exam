@@ -3,7 +3,7 @@ package com.pobitecoding.project.util;
 public abstract class PrintUtil {
     
     /**
-     * 메인 출력문
+     * 모드 출력문
      * 
      * 1. 테스트 모드 (저장 기능 off)
      * 2. 도서관 관리 프로그램
@@ -65,6 +65,4 @@ public abstract class PrintUtil {
                 + "6. 삭제취소\r\n"
                 + "============================\n");
     }
-    
-    
 }
