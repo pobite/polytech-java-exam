@@ -53,6 +53,6 @@ public class BookVO extends AbstractVO {
     @Override
     public String toString() {
         return "ID: " + super.getId() + ", 제목: " + title + ", 저자:" + author + ", 출판사:" + publisher
-                + ", 출간일: " + publicationDate + ", 대출 여부: " + getBookBorrow().isPossibleBorrow();
+                + ", 출간일: " + publicationDate + ", 대출 가능: " + getBookBorrow().isPossibleBorrow();
     }
 }

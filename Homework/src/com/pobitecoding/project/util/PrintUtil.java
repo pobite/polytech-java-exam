@@ -3,6 +3,20 @@ package com.pobitecoding.project.util;
 public abstract class PrintUtil {
     
     /**
+     * 메인 출력문
+     * 
+     * 1. 테스트 모드 (저장 기능 off)
+     * 2. 도서관 관리 프로그램
+     */
+    public static void modeMenu() {
+        System.out.println("\n============================\r\n"
+                + "1. 테스트 모드\r\n"
+                + "2. 도서관 관리 프로그램\r\n"
+                + "============================\n");
+    }
+    
+    
+    /**
      * 첫 번째 출력문
      * 
      * 1. 회원관리

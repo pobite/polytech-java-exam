@@ -200,7 +200,7 @@ public abstract class BookUtil {
      */
     public static int loan() {
         
-        List<String> types = Arrays.asList("1. 대출 가능 도서 조회", "2. 대출 진행 도서 조회 ", "3. 대출신청", "4. 대출연장");
+        List<String> types = Arrays.asList("1. 대출가능조회", "2. 대출진행조회 ", "3. 대출신청", "4. 대출연장");
         for (String type : types) {
             System.out.println(type);
         }
@@ -227,12 +227,12 @@ public abstract class BookUtil {
                 }
                 break;
             case 2 :
-                List<BookVO> bookListLoan = MainController.bookService.readLoan();
+                bookList = MainController.bookService.readLoan();
                 
-                if (bookListLoan.size() != 0) {
-                    bookListLoan.sort(new BookEndDateDescComparator());
+                if (bookList.size() != 0) {
+                    bookList.sort(new BookEndDateDescComparator());
                     System.out.println("현재 대출 중인 도서입니다.(대출 마감일순)");
-                    for (BookVO book : bookListLoan) {
+                    for (BookVO book : bookList) {
                         System.out.println(book.toString());
                     }
                 }
@@ -241,11 +241,46 @@ public abstract class BookUtil {
                 }
                 break;
             case 3 :
-                System.out.println("대출 연장할 도서의 id를 입력하세요:");
+                
+                System.out.println("대출할 도서의 id를 입력하세요:");
                 int id = MainController.scan.nextInt();
                 MainController.scan.nextLine();
-                
+
                 BookVO vo = MainController.bookService.read(id);
+                
+                /**
+                 * 도서가 존재하지 않는 경우
+                 */
+                if (vo == null) {
+                    System.out.println("도서가 존재하지 않습니다.");
+                }
+                else {
+                    
+                    if (vo.getBookBorrow().isPossibleBorrow()) {
+                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+                        
+                        LocalDate now = LocalDate.now();
+                        String nowString = now.format(formatter);
+                        
+                        LocalDate twoWeeksLater = now.plusWeeks(2);
+                        String twoWeeksLaterString = twoWeeksLater.format(formatter);
+                        
+                        vo.getBookBorrow().setStartDate(nowString);
+                        vo.getBookBorrow().setEndDate(twoWeeksLaterString);
+                        vo.getBookBorrow().setPossibleBorrow(false);
+                    }
+                    else {
+                        System.out.println("해당 도서가 대출 중임으로, 대출이 불가합니다.");
+                    }
+                }
+                break;
+                
+            case 4 :
+                System.out.println("대출 연장할 도서의 id를 입력하세요:");
+                id = MainController.scan.nextInt();
+                MainController.scan.nextLine();
+                
+                vo = MainController.bookService.read(id);
                 
                 /**
                  * 도서가 존재하지 않는 경우
@@ -279,10 +314,6 @@ public abstract class BookUtil {
                         System.out.println("이미 대출 연장을 사용하여 대출 연장이 불가합니다");
                     }
                 }
-                break;
-            case 4 :
-                System.out.println("대출 가능한 책의 리스트입니다.");
-//                System.out.println("대출 가능한");
                 break;
         }
         return 0;
