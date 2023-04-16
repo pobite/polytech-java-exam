@@ -4,8 +4,14 @@ import java.util.Scanner;
 import com.pobitecoding.project.controller.book.BookController;
 import com.pobitecoding.project.controller.customer.CustomerController;
 import com.pobitecoding.project.dao.book.BookCsvDAOImpl;
+import com.pobitecoding.project.dao.book.BookDAOImpl;
+import com.pobitecoding.project.dao.book.BookDbmsDAOImpl;
 import com.pobitecoding.project.dao.member.MemberCsvDAOImpl;
+import com.pobitecoding.project.dao.member.MemberDAOImpl;
+import com.pobitecoding.project.dao.member.MemberDbmsDAOImpl;
 import com.pobitecoding.project.loan.LoanCsvDAOImpl;
+import com.pobitecoding.project.loan.LoanDAOImpl;
+import com.pobitecoding.project.loan.LoanDbmsDAOImpl;
 import com.pobitecoding.project.service.book.BookService;
 import com.pobitecoding.project.service.book.BookServiceImpl;
 import com.pobitecoding.project.service.loan.LoanService;
@@ -20,9 +26,9 @@ import com.pobitecoding.project.vo.MemberVO;
 public class MainController {
     
     public static Scanner scan = new Scanner(System.in);
-    public static MemberService memberService = new MemberServiceImpl(new MemberCsvDAOImpl());
-    public static BookService bookService = new BookServiceImpl(new BookCsvDAOImpl());
-    public static LoanService loanService = new LoanServiceImpl(new LoanCsvDAOImpl());
+    public static MemberService memberService;
+    public static BookService bookService;
+    public static LoanService loanService;
     public static MemberVO prviousMember = new MemberVO();
     public static BookVO prviousBook = new BookVO();
     
@@ -31,17 +37,43 @@ public class MainController {
         CustomerController customerCon = new CustomerController();
         BookController bookCon = new BookController();
         
+        
+        /**
+         * 모드를 선택합니다.
+         * 1. 테스터 모드 (메모리상에서 동작합니다)
+         * 2. CSV 버전 (CSV상에서 동작합니다)
+         * 3. DBMS 버전 (DBMS상에서 동작합니다)
+         */
+        
+        PrintUtil.modeMenu();
+        
+        int mode = scan.nextInt();
+        scan.nextLine();    // Enter를 무시
+        //if (ValidationUtil.isInCorrectNum(mode, 1, 3)) continue;
+        
+        if (mode == 1) {
+            memberService = new MemberServiceImpl(new MemberDAOImpl());
+            bookService = new BookServiceImpl(new BookDAOImpl());
+            loanService = new LoanServiceImpl(new LoanDAOImpl());
+        }
+        else if (mode == 2) {
+            memberService = new MemberServiceImpl(new MemberCsvDAOImpl());
+            bookService = new BookServiceImpl(new BookCsvDAOImpl());
+            loanService = new LoanServiceImpl(new LoanCsvDAOImpl());
+        }
+        else if (mode == 3) {
+            memberService = new MemberServiceImpl(new MemberDbmsDAOImpl());
+            bookService = new BookServiceImpl(new BookDbmsDAOImpl());
+            loanService = new LoanServiceImpl(new LoanDbmsDAOImpl());
+        }
+        
+        
+        /**
+         * 프로그램 시작
+         */
+        
         boolean isExit = false;
         while(!isExit) {
-            
-            PrintUtil.modeMenu();
-            
-            int mode = scan.nextInt();
-            scan.nextLine();    // Enter를 무시
-            
-            if (ValidationUtil.isInCorrectNum(mode, 1, 2)) continue;
-            
-            
             
             PrintUtil.mainMenu();
             
