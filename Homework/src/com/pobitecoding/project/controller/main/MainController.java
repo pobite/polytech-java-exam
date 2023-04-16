@@ -3,6 +3,8 @@ package com.pobitecoding.project.controller.main;
 import java.util.Scanner;
 import com.pobitecoding.project.controller.book.BookController;
 import com.pobitecoding.project.controller.customer.CustomerController;
+import com.pobitecoding.project.dao.book.BookCsvDAOImpl;
+import com.pobitecoding.project.dao.book.BookDAOImpl;
 import com.pobitecoding.project.service.book.BookService;
 import com.pobitecoding.project.service.book.BookServiceImpl;
 import com.pobitecoding.project.service.loan.LoanService;
@@ -18,7 +20,8 @@ public class MainController {
     
     public static Scanner scan = new Scanner(System.in);
     public static MemberService memberService = new MemberServiceImpl();
-    public static BookService bookService = new BookServiceImpl();
+    public static BookService bookService = new BookServiceImpl(new BookCsvDAOImpl());
+    
     public static LoanService loanService = new LoanServiceImpl();
     public static MemberVO prviousMember = new MemberVO();
     public static BookVO prviousBook = new BookVO();

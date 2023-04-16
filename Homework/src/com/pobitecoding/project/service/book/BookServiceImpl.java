@@ -10,8 +10,8 @@ public class BookServiceImpl implements BookService{
     
     private BookDAO bookDAO;
     
-    public BookServiceImpl() {
-        bookDAO = new BookDAOImpl();
+    public BookServiceImpl(BookDAO bookDAO) {
+        this.bookDAO = bookDAO;
     }
     
     @Override
