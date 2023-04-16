@@ -10,9 +10,9 @@ public abstract class PrintUtil {
      */
     public static void modeMenu() {
         System.out.println("\n============================\r\n"
-                + "1. 테스트 모드(Memory Version)\r\n"
-                + "2. 도서관 관리 프로그램(CSV Version)\r\n"
-                + "3. 도서관 관리 프로그램(DBMS Version)\r\n"
+                + "1. 테스트 모드 (Memory Version)\r\n"
+                + "2. 도서관 관리 프로그램 (CSV Version)\r\n"
+                + "3. 도서관 관리 프로그램 (DBMS Version)\r\n"
                 + "============================\n");
     }
     

@@ -9,5 +9,6 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="lib" path="C:/Dev/workspace/polytech-java-exam/JavaExam/commons-lang3-3.12.0.jar"/>
 	<classpathentry kind="lib" path="C:/Dev/workspace/polytech-java-exam/JavaExam/opencsv-5.7.1.jar"/>
+	<classpathentry kind="lib" path="C:/Dev/workspace/polytech-java-exam/JavaExam/ojdbc11.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
