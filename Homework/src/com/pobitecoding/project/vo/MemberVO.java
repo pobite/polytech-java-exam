@@ -12,7 +12,22 @@ public class MemberVO extends AbstractVO{
     private String birthDate;
     private String joinDate;
 
+    public MemberVO() {
+        
+    }
     
+    public MemberVO(int id, String name, int gender, int age, String address, String number,
+            String birthDate, String joinDate) {
+        super.setId(id);
+        this.name = name;
+        this.gender = gender;
+        this.age = age;
+        this.address = address;
+        this.number = number;
+        this.birthDate = birthDate;
+        this.joinDate = joinDate;
+    }
+
     public int getAge() {
         return age;
     }

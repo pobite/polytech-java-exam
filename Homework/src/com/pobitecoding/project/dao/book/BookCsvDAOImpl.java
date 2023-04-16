@@ -71,6 +71,10 @@ public class BookCsvDAOImpl implements BookDAO {
                     bookVO.getPublisher(), bookVO.getPublicationDate(), String.valueOf(bookVO.isPossibleBorrow())});
             writer.close();
             
+            // Map에 삽입
+            bookVO.setId(bookCount);
+            dataSource.put(bookCount++, bookVO);
+            
         } catch (IOException e) {
             e.printStackTrace();
             return 0;
@@ -88,6 +92,7 @@ public class BookCsvDAOImpl implements BookDAO {
                 newBookList.add(bookVO);
             } else {
                 isDeleted = true;
+                dataSource.remove(bookVO.getId());
             }
         }
         if (!isDeleted) {

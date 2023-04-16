@@ -5,6 +5,7 @@ import com.pobitecoding.project.controller.book.BookController;
 import com.pobitecoding.project.controller.customer.CustomerController;
 import com.pobitecoding.project.dao.book.BookCsvDAOImpl;
 import com.pobitecoding.project.dao.book.BookDAOImpl;
+import com.pobitecoding.project.dao.member.MemberCsvDAOImpl;
 import com.pobitecoding.project.service.book.BookService;
 import com.pobitecoding.project.service.book.BookServiceImpl;
 import com.pobitecoding.project.service.loan.LoanService;
@@ -19,7 +20,7 @@ import com.pobitecoding.project.vo.MemberVO;
 public class MainController {
     
     public static Scanner scan = new Scanner(System.in);
-    public static MemberService memberService = new MemberServiceImpl();
+    public static MemberService memberService = new MemberServiceImpl(new MemberCsvDAOImpl());
     public static BookService bookService = new BookServiceImpl(new BookCsvDAOImpl());
     
     public static LoanService loanService = new LoanServiceImpl();

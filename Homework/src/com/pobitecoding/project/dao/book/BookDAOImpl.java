@@ -10,7 +10,6 @@ import com.pobitecoding.project.vo.LoanVO;
 public class BookDAOImpl implements BookDAO {
     
     private static int bookCount = 1;
-    
     private Map<Integer, BookVO> dataSource;
     
     public BookDAOImpl() {

@@ -9,8 +9,8 @@ public class MemberServiceImpl implements MemberService {
     
     private MemberDAO memberDAO;
     
-    public MemberServiceImpl() {
-        memberDAO = new MemberDAOImpl();
+    public MemberServiceImpl(MemberDAO memberDAO) {
+        this.memberDAO = memberDAO;
     }
     
     @Override
