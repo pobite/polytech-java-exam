@@ -1,51 +1,47 @@
 package com.pobitecoding.project.dao.book;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
+import com.pobitecoding.project.controller.main.MainController;
 import com.pobitecoding.project.vo.BookVO;
 
 public class BookDbmsDAOImpl implements BookDAO {
     
-    // Oracle JDBC 드라이버를 로드합니다. 
-    private Connection conn = null;
     
-    public BookDbmsDAOImpl() {
-        
-        // 데이터베이스에 연결합니다.
-        try {
-            Class.forName("oracle.jdbc.driver.OracleDriver");
-            String url = "jdbc:oracle:thin:@192.168.119.119:1521/dink";
-            String user = "scott";
-            String passwd = "tiger";
-            conn = DriverManager.getConnection(url, user, passwd);
-            System.out.println(conn);
-        
-        } catch (ClassNotFoundException e) {
-            // 드라이버 로드 중 예외가 발생한 경우 처리합니다.
-            e.printStackTrace();
-        } catch (SQLException e) {
-            // 데이터베이스 연결 및 쿼리 실행 중 예외가 발생한 경우 처리합니다.
-            e.printStackTrace();
-        }
-    }
+   
     
     @Override
     public int create(BookVO bookVO) {
-        String insertQuery = "INSERT INTO books (id, title, author, publisher, publication_date, is_possible_borrow) " +
-                "VALUES (?, ?, ?, ?, ?, ?)";
+        String insertQuery = "INSERT INTO BOOK2 (bookId, title, author, publisher, publicationDate, isPossibleBorrow) " +
+                "VALUES (BOOK2_SEQ.NEXTVAL, ?, ?, ?, ?, 'true')";
+
+        try (PreparedStatement pstmt = MainController.conn.prepareStatement(insertQuery)) {
+            pstmt.setString(1, bookVO.getTitle());
+            pstmt.setString(2, bookVO.getAuthor());
+            pstmt.setString(3, bookVO.getPublisher());
+            pstmt.setString(4, bookVO.getPublicationDate());
+//            pstmt.setBoolean(5, bookVO.isPossibleBorrow());
+
+            int rowCount = pstmt.executeUpdate();
+            return rowCount;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
+
+    @Override
+    public int delete(int id) {
+        String deleteQuery = "DELETE FROM BOOK2 WHERE bookId = ?";
         
-        try (PreparedStatement pstmt = conn.prepareStatement(insertQuery)) {
-            // id는 자동 생성되므로 '?'로 설정
-            pstmt.setString(1, null);
-            pstmt.setString(2, bookVO.getTitle());
-            pstmt.setString(3, bookVO.getAuthor());
-            pstmt.setString(4, bookVO.getPublisher());
-            pstmt.setString(5, bookVO.getPublicationDate());
-            pstmt.setBoolean(6, bookVO.isPossibleBorrow());
-            
+        try (PreparedStatement pstmt = MainController.conn.prepareStatement(deleteQuery)) {
+            pstmt.setInt(1, id);
             int rowCount = pstmt.executeUpdate();
             return rowCount;
             
@@ -55,34 +51,109 @@ public class BookDbmsDAOImpl implements BookDAO {
         }
     }
 
-    @Override
-    public int delete(int id) {
-        // TODO Auto-generated method stub
-        return 0;
+    public BookVO read(int id) {
+        BookVO book = null;
+        try {
+            // PreparedStatement를 사용하여 파라미터를 바인딩하고 쿼리 실행
+            PreparedStatement pstmt = MainController.conn.prepareStatement("SELECT * FROM book2 WHERE id = ?");
+            pstmt.setInt(1, id);
+            ResultSet rs = pstmt.executeQuery();
+            
+            // 조회 결과를 BookVO 객체에 매핑
+            if (rs.next()) {
+                book = new BookVO();
+                book.setId(rs.getInt("bookId"));
+                book.setTitle(rs.getString("title"));
+                book.setAuthor(rs.getString("author"));
+                book.setPublisher(rs.getString("publisher"));
+                book.setPublicationDate(rs.getString("publicationDate"));
+                book.setPossibleBorrow(rs.getBoolean("isPossibleBorrow"));
+            }
+            
+            // 자원 해제
+            rs.close();
+            pstmt.close();
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return book;
     }
 
-    @Override
-    public BookVO read(int id) {
-        // TODO Auto-generated method stub
-        return null;
-    }
 
     @Override
     public List<BookVO> readAll() {
-        // TODO Auto-generated method stub
-        return null;
+        List<BookVO> bookList = new ArrayList<>();
+
+        String selectQuery = "SELECT * FROM BOOK2";
+
+        try (Statement stmt = MainController.conn.createStatement(); ResultSet rs = stmt.executeQuery(selectQuery)) {
+            while (rs.next()) {
+                int id = rs.getInt("BOOKID");
+                String title = rs.getString("TITLE");
+                String author = rs.getString("AUTHOR");
+                String publisher = rs.getString("PUBLISHER");
+                String publicationDate = rs.getString("PUBLICATIONDATE");
+                boolean isPossibleBorrow = rs.getBoolean("ISPOSSIBLEBORROW");
+
+                BookVO bookVO = new BookVO(id, title, author, publisher, publicationDate, isPossibleBorrow);
+                bookList.add(bookVO);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+        return bookList;
     }
 
     @Override
     public List<BookVO> readBorrow() {
-        // TODO Auto-generated method stub
-        return null;
+        List<BookVO> borrowList = new ArrayList<>();
+
+        String selectQuery = "SELECT * FROM BOOK2 WHERE ISPOSSIBLEBORROW = FALSE";
+
+        try (Statement stmt = MainController.conn.createStatement(); ResultSet rs = stmt.executeQuery(selectQuery)) {
+            while (rs.next()) {
+                int id = rs.getInt("BOOKID");
+                String title = rs.getString("TITLE");
+                String author = rs.getString("AUTHOR");
+                String publisher = rs.getString("PUBLISHER");
+                String publicationDate = rs.getString("PUBLICATIONDATE");
+                boolean isPossibleBorrow = rs.getBoolean("ISPOSSIBLEBORROW");
+
+                BookVO bookVO = new BookVO(id, title, author, publisher, publicationDate, isPossibleBorrow);
+                borrowList.add(bookVO);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+        return borrowList;
     }
 
     @Override
     public List<BookVO> readLoan() {
-        // TODO Auto-generated method stub
-        return null;
-    }
+        List<BookVO> loanList = new ArrayList<>();
 
+        String selectQuery = "SELECT * FROM BOOK2 WHERE ISPOSSIBLEBORROW = TRUE";
+
+        try (Statement stmt = MainController.conn.createStatement(); ResultSet rs = stmt.executeQuery(selectQuery)) {
+            while (rs.next()) {
+                int id = rs.getInt("BOOKID");
+                String title = rs.getString("TITLE");
+                String author = rs.getString("AUTHOR");
+                String publisher = rs.getString("PUBLISHER");
+                String publicationDate = rs.getString("PUBLICATIONDATE");
+                boolean isPossibleBorrow = rs.getBoolean("ISPOSSIBLEBORROW");
+
+                BookVO bookVO = new BookVO(id, title, author, publisher, publicationDate, isPossibleBorrow);
+                loanList.add(bookVO);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+        return loanList;
+    }
 }

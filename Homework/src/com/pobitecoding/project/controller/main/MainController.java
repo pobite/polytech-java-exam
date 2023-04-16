@@ -1,5 +1,8 @@
 package com.pobitecoding.project.controller.main;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.Scanner;
 import com.pobitecoding.project.controller.book.BookController;
 import com.pobitecoding.project.controller.customer.CustomerController;
@@ -31,6 +34,7 @@ public class MainController {
     public static LoanService loanService;
     public static MemberVO prviousMember = new MemberVO();
     public static BookVO prviousBook = new BookVO();
+    public static Connection conn = null;
     
     public static void main(String[] args) {
         
@@ -62,6 +66,24 @@ public class MainController {
             loanService = new LoanServiceImpl(new LoanCsvDAOImpl());
         }
         else if (mode == 3) {
+            
+            // 데이터베이스에 연결합니다.
+            try {
+                Class.forName("oracle.jdbc.driver.OracleDriver");
+                String url = "jdbc:oracle:thin:@192.168.119.119:1521/dink";
+                String user = "scott";
+                String passwd = "tiger";
+                conn = DriverManager.getConnection(url, user, passwd);
+                System.out.println(conn);
+            
+            } catch (ClassNotFoundException e) {
+                // 드라이버 로드 중 예외가 발생한 경우 처리합니다.
+                e.printStackTrace();
+            } catch (SQLException e) {
+                // 데이터베이스 연결 및 쿼리 실행 중 예외가 발생한 경우 처리합니다.
+                e.printStackTrace();
+            }
+            
             memberService = new MemberServiceImpl(new MemberDbmsDAOImpl());
             bookService = new BookServiceImpl(new BookDbmsDAOImpl());
             loanService = new LoanServiceImpl(new LoanDbmsDAOImpl());
@@ -100,6 +122,15 @@ public class MainController {
                 System.out.println("종료를 누르셨습니다.");
                 System.out.println("이용해주셔서 감사합니다.");
                 isExit = false;
+            }
+            
+            // 연결, 쿼리 실행, 결과 처리에 사용된 오브젝트들을 종료합니다.
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
