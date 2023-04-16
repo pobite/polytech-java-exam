@@ -9,8 +9,8 @@ public class LoanServiceImpl implements LoanService {
     
     private LoanDAO loanDAO;
     
-    public LoanServiceImpl() {
-        loanDAO = new LoanDAOImpl();
+    public LoanServiceImpl(LoanDAO loanDAO) {
+        this.loanDAO = loanDAO;
     }
     
     @Override

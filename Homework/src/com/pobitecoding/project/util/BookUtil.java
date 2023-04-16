@@ -251,10 +251,8 @@ public abstract class BookUtil {
                     System.out.println("회원이 존재하지 않습니다.");
                     break;
                 }
-                
                 if (bookVO.isPossibleBorrow()) {
                     LoanVO loan = new LoanVO(memberId, bookId);
-                    
                     if (MainController.loanService.create(loan)) {
                         bookVO.setPossibleBorrow(false);
                         System.out.println("대출이 등록되었습니다.");

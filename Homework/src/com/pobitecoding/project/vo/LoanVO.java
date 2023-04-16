@@ -31,6 +31,21 @@ public class LoanVO extends AbstractVO{
         this.endDate = twoWeeksLaterString;
         this.isPossibleBorrow = false;
     }
+    
+    
+    
+    public LoanVO(int id, int memberId, int bookId, boolean isPossibleBorrow, boolean isPossibleExtend,
+            String startDate, String endDate) {
+        super.setId(id);
+        this.memberId = memberId;
+        this.bookId = bookId;
+        this.isPossibleBorrow = isPossibleBorrow;
+        this.isPossibleExtend = isPossibleExtend;
+        this.startDate = startDate;
+        this.endDate = endDate;
+    }
+
+
 
     public boolean isPossibleBorrow() {
         return isPossibleBorrow;

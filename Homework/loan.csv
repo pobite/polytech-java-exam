@@ -1,0 +1,3 @@
+"id","memberId","bookId","isPossibleBorrow","isPossibleExtend","startDate","endDate"
+"1","3","2","false","true","2023/04/16","2023/04/30"
+"4","3","2","false","true","2023/04/16","2023/04/30"
