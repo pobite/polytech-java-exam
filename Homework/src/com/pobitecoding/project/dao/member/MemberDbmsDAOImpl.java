@@ -30,7 +30,6 @@ public class MemberDbmsDAOImpl implements MemberDAO {
 
             int rowCount = pstmt.executeUpdate();
             return rowCount;
-
         } catch (SQLException e) {
             e.printStackTrace();
             return 0;
