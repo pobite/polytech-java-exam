@@ -3,11 +3,10 @@ package com.pobitecoding.project.util;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import com.pobitecoding.exam.exam09.Main;
 import com.pobitecoding.project.controller.main.MainController;
 import com.pobitecoding.project.sort.BookAuthorAscComparator;
 import com.pobitecoding.project.sort.BookEndDateDescComparator;
@@ -15,6 +14,8 @@ import com.pobitecoding.project.sort.BookPublicationDateDescComparator;
 import com.pobitecoding.project.sort.BookPublisherAscComparator;
 import com.pobitecoding.project.sort.BookTitleAscComparator;
 import com.pobitecoding.project.vo.BookVO;
+import com.pobitecoding.project.vo.LoanVO;
+import com.pobitecoding.project.vo.MemberVO;
 
 public abstract class BookUtil {
     
@@ -89,16 +90,10 @@ public abstract class BookUtil {
         String publicationDate = MainController.scan.nextLine();
         if (ValidationUtil.isNotDate(publicationDate)) return 0;
 
-        
-        Date now = new Date();
-        SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
-        String nowString = format.format(now);
-        
         BookVO vo = new BookVO();
         vo.setTitle(title);
         vo.setAuthor(author);
         vo.setPublisher(publisher);
-        vo.setRegistrationDate(nowString);
         vo.setPublicationDate(publicationDate);
         
         if (MainController.bookService.create(vo)) {
@@ -132,7 +127,7 @@ public abstract class BookUtil {
             
             boolean isSuccess = false;
             
-            List<String> types = Arrays.asList("1. 도서명", "2. 저자", "3. 출판사", "4. 대출 여부");
+            List<String> types = Arrays.asList("1. 도서명", "2. 저자", "3. 출판사");
             for (String type : types) {
                 System.out.println(type);
             }
@@ -141,9 +136,8 @@ public abstract class BookUtil {
             int type = MainController.scan.nextInt();
             MainController.scan.nextLine();
             
-            if (ValidationUtil.isInCorrectNum(type, 1, 4)) return 0;
+            if (ValidationUtil.isInCorrectNum(type, 1, 3)) return 0;
 
-            
             switch (type) {
                 case 1 :
                     System.out.println("변경할 도서명 입력하세요:");
@@ -164,26 +158,6 @@ public abstract class BookUtil {
                     vo.setPublisher(publisher);
                     isSuccess = true;
                     break;
-                case 4 :
-                    boolean isPossible = false;
-                    isPossible = vo.getBookBorrow().isPossibleBorrow();
-                    
-                    if (isPossible) {
-                        System.out.println(vo.getTitle() + "는 \"대출 가능\" 상태입니다.");
-                    }
-                    else {
-                        System.out.println(vo.getTitle() + "는 \"대출 불가능\" 상태입니다.");
-                    }
-                    
-                    System.out.println("대출 여부를 변경하시려면 \"Y\"를 입력해주세요");
-                    String answer = MainController.scan.nextLine();
-                    
-                    if (answer.equalsIgnoreCase("Y")) {
-                        vo.getBookBorrow().setPossibleBorrow(!isPossible); 
-                    }
-                    else {
-                        System.out.println("변경을 선택하지 않았습니다");
-                    }
                 default :
                     System.out.println("잘못된 입력");
                     break;
@@ -195,12 +169,13 @@ public abstract class BookUtil {
         return 0;
     }
     /**
-     * 도서 대출 여부 조회
-     * 모든 도서의 대출 여부를 조회합니다.
+     * 도서 대출
+     * 도서의 대출관 관련된 작업을 수행합니다.
      */
     public static int loan() {
         
-        List<String> types = Arrays.asList("1. 대출가능조회", "2. 대출진행조회 ", "3. 대출신청", "4. 대출연장");
+        List<String> types = Arrays.asList("1. 대출가능조회", "2. 대출진행조회 ", "3. 대출신청",
+                                           "4. 대출연장", "5. 대출반납");
         for (String type : types) {
             System.out.println(type);
         }
@@ -209,9 +184,12 @@ public abstract class BookUtil {
         int type = MainController.scan.nextInt();
         MainController.scan.nextLine();
         
-        if (ValidationUtil.isInCorrectNum(type, 1, 4)) return 0;
+        if (ValidationUtil.isInCorrectNum(type, 1, 5)) return 0;
             
         switch (type) {
+            /**
+             * 1. 대출 가능 조회
+             */
             case 1 :
                 List<BookVO> bookList = MainController.bookService.readBorrow();
                 
@@ -226,66 +204,84 @@ public abstract class BookUtil {
                     System.out.println("현재 대출 가능한 도서가 없습니다.");
                 }
                 break;
+            /**
+             * 2. 대출 진행 조회
+             */
             case 2 :
-                bookList = MainController.bookService.readLoan();
+                List<LoanVO> loanList = MainController.loanService.readAll();
                 
-                if (bookList.size() != 0) {
-                    bookList.sort(new BookEndDateDescComparator());
+                if (loanList.size() != 0) {
+                    loanList.sort(new BookEndDateDescComparator());
                     System.out.println("현재 대출 중인 도서입니다.(대출 마감일순)");
-                    for (BookVO book : bookList) {
-                        System.out.println(book.toString());
+                    for (LoanVO loan : loanList) {
+                        System.out.println(loan.toString());
                     }
                 }
                 else {
                     System.out.println("현재 대출 중인 도서가 없습니다.");
                 }
                 break;
+            /**
+             * 3. 대출신청
+             */
             case 3 :
-                
                 System.out.println("대출할 도서의 id를 입력하세요:");
-                int id = MainController.scan.nextInt();
+                int bookId = MainController.scan.nextInt();
                 MainController.scan.nextLine();
-
-                BookVO vo = MainController.bookService.read(id);
+                
+                BookVO bookVO = MainController.bookService.read(bookId);
                 
                 /**
                  * 도서가 존재하지 않는 경우
                  */
-                if (vo == null) {
+                if (bookVO == null) {
                     System.out.println("도서가 존재하지 않습니다.");
+                    break;
                 }
-                else {
+                
+                System.out.println("대출할 회원의 id를 입력하세요:");
+                int memberId = MainController.scan.nextInt();
+                MainController.scan.nextLine();
+                
+                /**
+                 * 회원이 존재하지 않는 경우
+                 */
+                MemberVO memberVO = MainController.memberService.read(memberId);
+                if (memberVO == null) {
+                    System.out.println("회원이 존재하지 않습니다.");
+                    break;
+                }
+                
+                if (bookVO.isPossibleBorrow()) {
+                    LoanVO loan = new LoanVO(memberId, bookId);
                     
-                    if (vo.getBookBorrow().isPossibleBorrow()) {
-                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
-                        
-                        LocalDate now = LocalDate.now();
-                        String nowString = now.format(formatter);
-                        
-                        LocalDate twoWeeksLater = now.plusWeeks(2);
-                        String twoWeeksLaterString = twoWeeksLater.format(formatter);
-                        
-                        vo.getBookBorrow().setStartDate(nowString);
-                        vo.getBookBorrow().setEndDate(twoWeeksLaterString);
-                        vo.getBookBorrow().setPossibleBorrow(false);
+                    if (MainController.loanService.create(loan)) {
+                        bookVO.setPossibleBorrow(false);
+                        System.out.println("대출이 등록되었습니다.");
                     }
                     else {
-                        System.out.println("해당 도서가 대출 중임으로, 대출이 불가합니다.");
+                        System.out.println("대출시 실패하였습니다.");
                     }
+                    
+                }
+                else {
+                    System.out.println("해당 도서가 대출 중임으로, 대출이 불가합니다.");
                 }
                 break;
-                
+            /**
+             * 4. 대출연장    
+             */
             case 4 :
                 System.out.println("대출 연장할 도서의 id를 입력하세요:");
-                id = MainController.scan.nextInt();
+                bookId = MainController.scan.nextInt();
                 MainController.scan.nextLine();
                 
-                vo = MainController.bookService.read(id);
+                LoanVO loan = MainController.loanService.readMem(bookId);
                 
                 /**
                  * 도서가 존재하지 않는 경우
                  */
-                if (vo == null) {
+                if (loan == null) {
                     System.out.println("도서가 존재하지 않습니다.");
                 }
                 
@@ -293,28 +289,58 @@ public abstract class BookUtil {
                  * 도서가 존재하는 경우
                  */
                 else {
-                    if (vo.getBookBorrow().isPossibleExtend()) {
+                    if (loan.isPossibleExtend()) {
                         System.out.println("대출 여부를 변경하시려면 \"Y\"를 입력해주세요");
                         String answer = MainController.scan.nextLine();
                         
                         if (answer.equalsIgnoreCase("Y")) {
-                            vo.getBookBorrow().setPossibleExtend(false);
-                            String dateString = vo.getBookBorrow().getEndDate();
+                            loan.setPossibleExtend(false);
+                            String dateString = loan.getEndDate();
                             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
                             LocalDate date = LocalDate.parse(dateString, formatter);
                             LocalDate extendedDate = date.plusWeeks(1);
                             String extendedDateString = extendedDate.format(formatter);
-                            vo.getBookBorrow().setEndDate(extendedDateString);
+                            loan.setEndDate(extendedDateString);
+                            System.out.println("2주의 도서 대출이 완료되었습니다.");
                         }
                         else {
-                            System.out.println("변경을 선택하지 않았습니다");
+                            System.out.println("변경을 선택하지 않았습니다.");
                         }
                     }
                     else {
-                        System.out.println("이미 대출 연장을 사용하여 대출 연장이 불가합니다");
+                        System.out.println("이미 대출 연장을 사용하여 대출 연장이 불가합니다.");
                     }
                 }
                 break;
+            /**
+             * 5. 대출반납
+             */
+            case 5 :
+                System.out.println("대출 반납할 도서의 id를 입력하세요:");
+                bookId = MainController.scan.nextInt();
+                MainController.scan.nextLine();
+                
+                loan = MainController.loanService.readBook(bookId);
+                
+                if (loan == null) {
+                    System.out.println("해당 도서는 대출이 진행 중이지 않습니다.");
+                    break;
+                }
+                
+               
+                System.out.println("대출 반납을 진행하려면 \"Y\"를 입력해주세요");
+                String answer = MainController.scan.nextLine();
+                
+                if (answer.equalsIgnoreCase("Y")) {
+                    BookVO book = MainController.bookService.read(bookId);
+                    book.setPossibleBorrow(true);
+                    
+                    MainController.loanService.deleteByBookId(bookId);
+                    System.out.println("반납이 완료되었습니다");
+                }
+                else {
+                    System.out.println("반납을 진행하지 않았습니다");
+                }
         }
         return 0;
     }

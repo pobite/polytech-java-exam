@@ -5,6 +5,8 @@ import com.pobitecoding.project.controller.book.BookController;
 import com.pobitecoding.project.controller.customer.CustomerController;
 import com.pobitecoding.project.service.book.BookService;
 import com.pobitecoding.project.service.book.BookServiceImpl;
+import com.pobitecoding.project.service.loan.LoanService;
+import com.pobitecoding.project.service.loan.LoanServiceImpl;
 import com.pobitecoding.project.service.member.MemberService;
 import com.pobitecoding.project.service.member.MemberServiceImpl;
 import com.pobitecoding.project.util.PrintUtil;
@@ -17,6 +19,7 @@ public class MainController {
     public static Scanner scan = new Scanner(System.in);
     public static MemberService memberService = new MemberServiceImpl();
     public static BookService bookService = new BookServiceImpl();
+    public static LoanService loanService = new LoanServiceImpl();
     public static MemberVO prviousMember = new MemberVO();
     public static BookVO prviousBook = new BookVO();
     

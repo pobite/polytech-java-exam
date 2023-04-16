@@ -2,7 +2,7 @@ package com.pobitecoding.project.dao.book;
 
 import java.util.List;
 import com.pobitecoding.project.vo.BookVO;
-import com.pobitecoding.project.vo.MemberVO;
+import com.pobitecoding.project.vo.LoanVO;
 
 public interface BookDAO {
     
@@ -17,4 +17,10 @@ public interface BookDAO {
     public List<BookVO> readBorrow();
     
     public List<BookVO> readLoan();
+    
+//    public LoanVO readLoan(int id);
+//    
+//    public List<LoanVO> readBorrow();
+//    
+//    public List<LoanVO> readLoan();
 }

@@ -2,11 +2,12 @@ package com.pobitecoding.project.sort;
 
 import java.util.Comparator;
 import com.pobitecoding.project.vo.BookVO;
+import com.pobitecoding.project.vo.LoanVO;
 
-public class BookEndDateDescComparator implements Comparator<BookVO>{
+public class BookEndDateDescComparator implements Comparator<LoanVO>{
 
     @Override
-    public int compare(BookVO o1, BookVO o2) {
-        return o1.getBookBorrow().getEndDate().compareTo(o2.getBookBorrow().getEndDate()) * - 1;
+    public int compare(LoanVO o1, LoanVO o2) {
+        return o1.getEndDate().compareTo(o2.getEndDate()) * - 1;
     }
 }

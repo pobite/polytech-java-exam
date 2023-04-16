@@ -6,11 +6,10 @@ public class BookVO extends AbstractVO {
     private String author;
     private String publisher;
     private String publicationDate;
-    private String registrationDate;
-    private BookBorrow bookBorrow;
+    private boolean isPossibleBorrow;
     
     public BookVO() {
-        bookBorrow = new BookBorrow();
+        isPossibleBorrow = true;
     }
     
     public String getPublicationDate() {
@@ -37,22 +36,16 @@ public class BookVO extends AbstractVO {
     public void setPublisher(String publisher) {
         this.publisher = publisher;
     }
-    public BookBorrow getBookBorrow() {
-        return bookBorrow;
-    }
-    public void setBooBorrow(BookBorrow bookBorrow) {
-        this.bookBorrow = bookBorrow;
-    }
-    public String getRegistrationDate() {
-        return registrationDate;
-    }
-    public void setRegistrationDate(String registrationDate) {
-        this.registrationDate = registrationDate;
-    }
     
+    public boolean isPossibleBorrow() {
+        return isPossibleBorrow;
+    }
+    public void setPossibleBorrow(boolean isPossibleBorrow) {
+        this.isPossibleBorrow = isPossibleBorrow;
+    }
     @Override
     public String toString() {
         return "ID: " + super.getId() + ", 제목: " + title + ", 저자:" + author + ", 출판사:" + publisher
-                + ", 출간일: " + publicationDate + ", 대출 가능: " + getBookBorrow().isPossibleBorrow();
+                + ", 출간일: " + publicationDate + ", 대출가능: " + isPossibleBorrow;
     }
 }

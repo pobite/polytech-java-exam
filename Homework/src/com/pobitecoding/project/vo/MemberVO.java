@@ -11,11 +11,7 @@ public class MemberVO extends AbstractVO{
     private String number;
     private String birthDate;
     private String joinDate;
-    private BookBorrow bookBorrow;
-    
-    public MemberVO() {
-        bookBorrow = new BookBorrow();
-    }
+
     
     public int getAge() {
         return age;
@@ -71,14 +67,6 @@ public class MemberVO extends AbstractVO{
 
     public void setJoinDate(String joinDate) {
         this.joinDate = joinDate;
-    }
-
-    public BookBorrow getBookLoan() {
-        return bookBorrow;
-    }
-
-    public void setBookLoan(BookBorrow bookLoan) {
-        this.bookBorrow = bookLoan;
     }
 
     @Override

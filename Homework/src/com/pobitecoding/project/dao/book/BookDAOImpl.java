@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import com.pobitecoding.project.vo.BookVO;
+import com.pobitecoding.project.vo.LoanVO;
 
 public class BookDAOImpl implements BookDAO {
     
@@ -27,7 +28,6 @@ public class BookDAOImpl implements BookDAO {
     public int delete(int id) {
         dataSource.remove(id);
         return 1;
-        
     }
 
     @Override
@@ -41,13 +41,13 @@ public class BookDAOImpl implements BookDAO {
                          .stream()
                          .map(entry -> entry.getValue())
                          .collect(Collectors.toList());
-    }
-
+    }    
+    
     @Override
     public List<BookVO> readBorrow() {
         return dataSource.entrySet()
                          .stream()
-                         .filter(entry -> entry.getValue().getBookBorrow().isPossibleBorrow() == true)
+                         .filter(entry -> entry.getValue().isPossibleBorrow() == true)
                          .map(entry -> entry.getValue())
                          .collect(Collectors.toList());
     }
@@ -56,10 +56,34 @@ public class BookDAOImpl implements BookDAO {
     public List<BookVO> readLoan() {
         return dataSource.entrySet()
                 .stream()
-                .filter(entry -> entry.getValue().getBookBorrow().isPossibleBorrow() == false)
+                .filter(entry -> entry.getValue().isPossibleBorrow() == false)
                 .map(entry -> entry.getValue())
                 .collect(Collectors.toList());
     }
+
+    
+//    @Override
+//    public List<LoanVO> readBorrow() {
+//        return dataSourceLoan.entrySet()
+//                .stream()
+//                .filter(entry -> entry.getValue().isPossibleBorrow() == true)
+//                .map(entry -> entry.getValue())
+//                .collect(Collectors.toList());
+//    }
+
+//    @Override
+//    public List<LoanVO> readLoan() {
+//        return dataSourceLoan.entrySet()
+//                .stream()
+//                .filter(entry -> entry.getValue().isPossibleBorrow() == false)
+//                .map(entry -> entry.getValue())
+//                .collect(Collectors.toList());
+//    }
+//
+//    @Override
+//    public LoanVO readLoan(int id) {
+//        return dataSourceLoan.get(id);
+//    }
 
 
 }
