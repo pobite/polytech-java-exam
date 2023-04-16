@@ -12,6 +12,18 @@ public class BookVO extends AbstractVO {
         isPossibleBorrow = true;
     }
     
+    public BookVO(int id, String title, String author, String publisher, String publicationDate,
+            boolean isPossibleBorrow) {
+        super.setId(id);;
+        this.title = title;
+        this.author = author;
+        this.publisher = publisher;
+        this.publicationDate = publicationDate;
+        this.isPossibleBorrow = isPossibleBorrow;
+    }
+
+
+
     public String getPublicationDate() {
         return publicationDate;
     }
