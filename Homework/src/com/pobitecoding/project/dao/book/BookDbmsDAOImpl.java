@@ -53,7 +53,7 @@ public class BookDbmsDAOImpl implements BookDAO {
         BookVO book = null;
         try {
             // PreparedStatement를 사용하여 파라미터를 바인딩하고 쿼리 실행
-            PreparedStatement pstmt = MainController.conn.prepareStatement("SELECT * FROM book2 WHERE id = ?");
+            PreparedStatement pstmt = MainController.conn.prepareStatement("SELECT * FROM book2 WHERE BOOKID = ?");
             pstmt.setInt(1, id);
             ResultSet rs = pstmt.executeQuery();
             
@@ -164,7 +164,7 @@ public class BookDbmsDAOImpl implements BookDAO {
             pstmt.setString(2, bookVO.getAuthor());
             pstmt.setString(3, bookVO.getPublisher());
             pstmt.setString(4, bookVO.getPublicationDate());
-            pstmt.setBoolean(5, bookVO.isPossibleBorrow());
+            pstmt.setString(5, bookVO.isPossibleBorrow() ? "true" : "false");
             pstmt.setInt(6, bookVO.getId());
 
             int rowCount = pstmt.executeUpdate();
