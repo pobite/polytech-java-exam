@@ -12,8 +12,6 @@ import com.pobitecoding.project.vo.BookVO;
 public class BookDbmsDAOImpl implements BookDAO {
     
     
-   
-    
     @Override
     public int create(BookVO bookVO) {
         String insertQuery = "INSERT INTO BOOK2 (bookId, title, author, publisher, publicationDate, isPossibleBorrow) " +
@@ -155,5 +153,26 @@ public class BookDbmsDAOImpl implements BookDAO {
             return null;
         }
         return loanList;
+    }
+
+    @Override
+    public int update(BookVO bookVO) {
+        String updateQuery = "UPDATE BOOK2 SET TITLE=?, AUTHOR=?, PUBLISHER=?, PUBLICATIONDATE=?, ISPOSSIBLEBORROW=? WHERE BOOKID=?";
+        
+        try (PreparedStatement pstmt = MainController.conn.prepareStatement(updateQuery)) {
+            pstmt.setString(1, bookVO.getTitle());
+            pstmt.setString(2, bookVO.getAuthor());
+            pstmt.setString(3, bookVO.getPublisher());
+            pstmt.setString(4, bookVO.getPublicationDate());
+            pstmt.setBoolean(5, bookVO.isPossibleBorrow());
+            pstmt.setInt(6, bookVO.getId());
+
+            int rowCount = pstmt.executeUpdate();
+            return rowCount;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return 0;
+        }
     }
 }

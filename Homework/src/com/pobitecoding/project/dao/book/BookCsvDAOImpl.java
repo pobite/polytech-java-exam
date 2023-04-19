@@ -140,4 +140,10 @@ public class BookCsvDAOImpl implements BookDAO {
                          .filter(book -> !book.isPossibleBorrow())
                          .collect(Collectors.toList());
     }
+
+    @Override
+    public int update(BookVO bookVO) {
+        // do nothing
+        return 0;
+    }
 }

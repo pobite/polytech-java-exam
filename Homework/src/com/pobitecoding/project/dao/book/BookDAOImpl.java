@@ -60,6 +60,12 @@ public class BookDAOImpl implements BookDAO {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public int update(BookVO bookVO) {
+        // do nothing
+        return 0;
+    }
+
     
 //    @Override
 //    public List<LoanVO> readBorrow() {

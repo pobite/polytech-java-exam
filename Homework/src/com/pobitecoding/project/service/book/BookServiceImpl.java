@@ -43,6 +43,12 @@ public class BookServiceImpl implements BookService{
     public List<BookVO> readLoan() {
         return bookDAO.readLoan();
     }
+    
+    @Override
+    public boolean update(BookVO bookVO) {
+        return bookDAO.update(bookVO) > 0;
+    }
+    
 //    @Override
 //    public List<LoanVO> readBorrow() {
 //        return bookDAO.readBorrow();
@@ -58,5 +64,7 @@ public class BookServiceImpl implements BookService{
 //        return bookDAO.readLoan(id);
 //    }
 //    
+
+
 
 }

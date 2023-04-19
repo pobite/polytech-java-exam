@@ -163,7 +163,12 @@ public abstract class BookUtil {
                     break;
             }
             if (isSuccess) {
-                System.out.println("처리되었습니다.");
+                boolean result = MainController.bookService.update(vo);
+                if (result) {
+                    System.out.println("DBMS에서 도서 정보가 수정되었습니다.");
+                } else {
+                    System.out.println("도서 정보가 수정되었습니다.");
+                }
             }
         }
         return 0;
