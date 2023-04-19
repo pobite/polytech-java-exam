@@ -58,5 +58,10 @@ public class LoanServiceImpl implements LoanService {
         return loanDAO.readLoan();
     }
 
+    @Override
+    public boolean update(LoanVO loanVO) {
+        return loanDAO.update(loanVO) > 0;
+    }
+
 
 }

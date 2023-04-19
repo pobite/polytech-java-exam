@@ -7,7 +7,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import com.pobitecoding.project.controller.main.MainController;
-import com.pobitecoding.project.vo.BookVO;
 import com.pobitecoding.project.vo.LoanVO;
 
 public class LoanDbmsDAOImpl implements LoanDAO {
@@ -232,4 +231,25 @@ public class LoanDbmsDAOImpl implements LoanDAO {
         return loanList;
     }
 
+    @Override
+    public int update(LoanVO loanVO) {
+        String updateQuery = "UPDATE LOAN SET memberId=?, bookId=?, isPossibleBorrow=?, isPossibleExtend=?, startDate=?, endDate=? WHERE BOOKID = ?";
+        
+        try (PreparedStatement pstmt = MainController.conn.prepareStatement(updateQuery)) {
+            pstmt.setInt(1, loanVO.getMemberId());
+            pstmt.setInt(2, loanVO.getBookId());
+            pstmt.setString(3, loanVO.isPossibleBorrow() ? "true" : "false");
+            pstmt.setString(4, loanVO.isPossibleBorrow() ? "true" : "false");
+            pstmt.setString(5, loanVO.getStartDate());
+            pstmt.setString(6, loanVO.getEndDate());
+            pstmt.setInt(7, loanVO.getBookId());
+
+            int rowCount = pstmt.executeUpdate();
+            return rowCount;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
 }

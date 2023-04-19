@@ -284,13 +284,13 @@ public abstract class BookUtil {
                 bookId = MainController.scan.nextInt();
                 MainController.scan.nextLine();
                 
-                LoanVO loan = MainController.loanService.readMem(bookId);
+                LoanVO loan = MainController.loanService.readBook(bookId);
                 
                 /**
                  * 도서가 존재하지 않는 경우
                  */
                 if (loan == null) {
-                    System.out.println("도서가 존재하지 않습니다.");
+                    System.out.println("대출 중 리스트에서 해당 도서가 존재하지 않습니다.");
                 }
                 
                 /**
@@ -309,7 +309,10 @@ public abstract class BookUtil {
                             LocalDate extendedDate = date.plusWeeks(1);
                             String extendedDateString = extendedDate.format(formatter);
                             loan.setEndDate(extendedDateString);
-                            System.out.println("2주의 도서 대출이 완료되었습니다.");
+                            
+                            if (MainController.loanService.update(loan)) {
+                                System.out.println("2주의 도서 대출이 완료되었습니다.");
+                            }
                         }
                         else {
                             System.out.println("변경을 선택하지 않았습니다.");

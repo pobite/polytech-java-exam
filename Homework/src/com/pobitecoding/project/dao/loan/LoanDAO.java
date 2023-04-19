@@ -24,4 +24,6 @@ public interface LoanDAO {
     
     public List<LoanVO> readLoan();
     
+    public int update(LoanVO loanVO);
+    
 }

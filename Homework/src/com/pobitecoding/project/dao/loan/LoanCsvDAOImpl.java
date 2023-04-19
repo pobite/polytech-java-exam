@@ -199,4 +199,11 @@ public class LoanCsvDAOImpl implements LoanDAO {
                 .filter(loan -> !loan.isPossibleBorrow())
                 .collect(Collectors.toList());
     }
+
+
+    @Override
+    public int update(LoanVO loanVO) {
+        // do nothing
+        return 0;
+    }
 }

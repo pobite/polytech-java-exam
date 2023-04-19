@@ -90,4 +90,10 @@ public class LoanDAOImpl implements LoanDAO {
                 .map(entry -> entry.getValue())
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public int update(LoanVO loanVO) {
+        // do nothing
+        return 0;
+    }
 }

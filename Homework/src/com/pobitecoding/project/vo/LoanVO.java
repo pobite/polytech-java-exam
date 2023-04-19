@@ -12,9 +12,6 @@ public class LoanVO extends AbstractVO{
     private String startDate;
     private String endDate;
     
-    
-    
-    
     public LoanVO() {
         super();
     }
