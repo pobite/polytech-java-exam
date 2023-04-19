@@ -12,4 +12,6 @@ public interface MemberDAO {
     public MemberVO read(int id);
     
     public List<MemberVO> readAll();
+    
+    public int update(MemberVO memberVO);
 }

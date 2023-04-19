@@ -13,4 +13,6 @@ public interface MemberService {
     
     public List<MemberVO> readAll();
     
+    public boolean updateMember(MemberVO memberVO);
+    
 }

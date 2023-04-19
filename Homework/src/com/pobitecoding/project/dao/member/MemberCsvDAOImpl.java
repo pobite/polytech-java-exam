@@ -130,4 +130,11 @@ public class MemberCsvDAOImpl implements MemberDAO {
     public List<MemberVO> readAll() {
         return new ArrayList<>(dataSource.values());
     }
+
+
+    @Override
+    public int update(MemberVO memberVO) {
+        // do nothing
+        return 0;
+    }
 }

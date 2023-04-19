@@ -32,4 +32,9 @@ public class MemberServiceImpl implements MemberService {
     public List<MemberVO> readAll() {
         return memberDAO.readAll();
     }
+
+    @Override
+    public boolean updateMember(MemberVO memberVO) {
+        return memberDAO.update(memberVO) > 0;
+    }
 }

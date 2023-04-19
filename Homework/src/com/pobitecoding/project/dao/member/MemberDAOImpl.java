@@ -43,4 +43,10 @@ public class MemberDAOImpl implements MemberDAO {
                          .map(entry -> entry.getValue())
                          .collect(Collectors.toList());
     }
+
+    @Override
+    public int update(MemberVO memberVO) {
+        // do nothing
+        return 0;
+    }
 }

@@ -110,5 +110,26 @@ public class MemberDbmsDAOImpl implements MemberDAO {
         }
         return memberList;
     }
+    
+    public int update(MemberVO memberVO) {
+        String updateQuery = "UPDATE MEMBER SET memberName = ?, gender = ?, age = ?, address = ?, memberNumber = ?, birthDate = ?, joinDate = ? WHERE memberId = ?";
 
+        try (PreparedStatement pstmt = MainController.conn.prepareStatement(updateQuery)) {
+            pstmt.setString(1, memberVO.getName());
+            pstmt.setInt(2, memberVO.getGender());
+            pstmt.setInt(3, memberVO.getAge());
+            pstmt.setString(4, memberVO.getAddress());
+            pstmt.setString(5, memberVO.getNumber());
+            pstmt.setString(6, memberVO.getBirthDate());
+            pstmt.setString(7, memberVO.getJoinDate());
+            pstmt.setInt(8, memberVO.getId());
+
+            int rowCount = pstmt.executeUpdate();
+            return rowCount;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+   
 }

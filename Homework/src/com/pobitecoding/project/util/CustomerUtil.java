@@ -167,9 +167,14 @@ public abstract class CustomerUtil {
                     System.out.println("잘못된 입력");
                     break;
             }
-                if (isSuccess) {
-                    System.out.println("처리되었습니다.");
+            if (isSuccess) {
+                boolean result = MainController.memberService.updateMember(vo);
+                if (result) {
+                    System.out.println("DBMS에서 회원 정보가 수정되었습니다.");
+                } else {
+                    System.out.println("회원 정보가 수정되었습니다.");
                 }
+            }
         }
         return 0;
     }
