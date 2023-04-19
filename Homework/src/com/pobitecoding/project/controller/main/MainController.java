@@ -123,14 +123,14 @@ public class MainController {
                 System.out.println("이용해주셔서 감사합니다.");
                 isExit = false;
             }
-            
-            // 연결, 쿼리 실행, 결과 처리에 사용된 오브젝트들을 종료합니다.
-            if (conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
+        }
+        
+        // 연결, 쿼리 실행, 결과 처리에 사용된 오브젝트들을 종료합니다.
+        if (conn != null) {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
         }
     }
