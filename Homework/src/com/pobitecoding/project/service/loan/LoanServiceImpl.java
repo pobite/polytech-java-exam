@@ -1,8 +1,8 @@
 package com.pobitecoding.project.service.loan;
 
 import java.util.List;
-import com.pobitecoding.project.loan.LoanDAO;
-import com.pobitecoding.project.loan.LoanDAOImpl;
+import com.pobitecoding.project.dao.loan.LoanDAO;
+import com.pobitecoding.project.dao.loan.LoanDAOImpl;
 import com.pobitecoding.project.vo.LoanVO;
 
 public class LoanServiceImpl implements LoanService {

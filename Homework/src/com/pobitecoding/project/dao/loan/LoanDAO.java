@@ -1,4 +1,4 @@
-package com.pobitecoding.project.loan;
+package com.pobitecoding.project.dao.loan;
 
 import java.util.List;
 import com.pobitecoding.project.vo.BookVO;

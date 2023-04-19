@@ -1,4 +1,4 @@
-package com.pobitecoding.project.loan;
+package com.pobitecoding.project.dao.loan;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -15,7 +15,6 @@ import java.util.stream.Collectors;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVWriter;
 import com.opencsv.exceptions.CsvValidationException;
-import com.pobitecoding.project.vo.BookVO;
 import com.pobitecoding.project.vo.LoanVO;
 
 public class LoanCsvDAOImpl implements LoanDAO {

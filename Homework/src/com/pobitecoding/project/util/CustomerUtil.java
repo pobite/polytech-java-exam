@@ -95,7 +95,7 @@ public abstract class CustomerUtil {
         MainController.scan.nextLine();
         
         MemberVO vo = MainController.memberService.read(id);
-        
+        System.out.println(vo);
         /**
          * 회원이 존재하지 않는 경우
          */
