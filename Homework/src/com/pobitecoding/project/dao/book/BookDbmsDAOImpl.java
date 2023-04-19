@@ -108,7 +108,7 @@ public class BookDbmsDAOImpl implements BookDAO {
     public List<BookVO> readBorrow() {
         List<BookVO> borrowList = new ArrayList<>();
 
-        String selectQuery = "SELECT * FROM BOOK2 WHERE ISPOSSIBLEBORROW = FALSE";
+        String selectQuery = "SELECT * FROM BOOK2 WHERE ISPOSSIBLEBORROW = 'true'";
 
         try (Statement stmt = MainController.conn.createStatement(); ResultSet rs = stmt.executeQuery(selectQuery)) {
             while (rs.next()) {
@@ -134,7 +134,7 @@ public class BookDbmsDAOImpl implements BookDAO {
     public List<BookVO> readLoan() {
         List<BookVO> loanList = new ArrayList<>();
 
-        String selectQuery = "SELECT * FROM BOOK2 WHERE ISPOSSIBLEBORROW = TRUE";
+        String selectQuery = "SELECT * FROM BOOK2 WHERE ISPOSSIBLEBORROW = 'false'";
 
         try (Statement stmt = MainController.conn.createStatement(); ResultSet rs = stmt.executeQuery(selectQuery)) {
             while (rs.next()) {

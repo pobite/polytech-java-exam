@@ -259,8 +259,13 @@ public abstract class BookUtil {
                 if (bookVO.isPossibleBorrow()) {
                     LoanVO loan = new LoanVO(memberId, bookId);
                     if (MainController.loanService.create(loan)) {
-                        bookVO.setPossibleBorrow(false);
                         System.out.println("대출이 등록되었습니다.");
+                        bookVO.setPossibleBorrow(false);
+                        
+                        if (MainController.bookService.update(bookVO)) {
+                            System.out.println(bookVO.getTitle() + "의 대출 가능 여부가 변경되었습니다.");
+                        }
+                        
                     }
                     else {
                         System.out.println("대출시 실패하였습니다.");

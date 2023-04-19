@@ -12,6 +12,13 @@ public class LoanVO extends AbstractVO{
     private String startDate;
     private String endDate;
     
+    
+    
+    
+    public LoanVO() {
+        super();
+    }
+
     public LoanVO(int memberId, int bookId) {
         
         this.memberId = memberId;
